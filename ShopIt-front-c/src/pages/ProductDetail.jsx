@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { Container } from '../styles/common/Container';
 import { Title, Subtitle, Price } from '../styles/common/Typography';
 import useProductStore from '../store/productStore';
@@ -25,73 +23,38 @@ const ProductDetail = () => {
   }, [id, fetchProduct]);
 
   if (loading) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <LoadingMessage>상품 정보를 불러오는 중...</LoadingMessage>
-        </Main>
-        <Footer />
-      </>
-    );
+    return <LoadingMessage>상품 정보를 불러오는 중...</LoadingMessage>;
   }
 
   if (error) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <ErrorMessage>{error}</ErrorMessage>
-        </Main>
-        <Footer />
-      </>
-    );
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   if (!product) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <ErrorMessage>상품을 찾을 수 없습니다.</ErrorMessage>
-        </Main>
-        <Footer />
-      </>
-    );
+    return <ErrorMessage>상품을 찾을 수 없습니다.</ErrorMessage>;
   }
 
   return (
-    <>
-      <Header />
-      <Main>
-        <Container>
-          <ProductGrid>
-            <ProductImage src={product.image} alt={product.name} />
-            <ProductInfo>
-              <Title>{product.name}</Title>
-              <Price>₩{Number(product.price).toLocaleString()}</Price>
-              <Rating>
-                평점: {product.rating} ({product.reviewCount}개의 리뷰)
-              </Rating>
-              <Description>{product.description}</Description>
-              <Category>카테고리: {product.category}</Category>
-              <ButtonGroup>
-                <PrimaryButton>장바구니에 담기</PrimaryButton>
-                <SecondaryButton>구매하기</SecondaryButton>
-              </ButtonGroup>
-            </ProductInfo>
-          </ProductGrid>
-        </Container>
-      </Main>
-      <Footer />
-    </>
+    <Container>
+      <ProductGrid>
+        <ProductImage src={product.image} alt={product.name} />
+        <ProductInfo>
+          <Title>{product.name}</Title>
+          <Price>₩{Number(product.price).toLocaleString()}</Price>
+          <Rating>
+            평점: {product.rating} ({product.reviewCount}개의 리뷰)
+          </Rating>
+          <Description>{product.description}</Description>
+          <Category>카테고리: {product.category}</Category>
+          <ButtonGroup>
+            <PrimaryButton>장바구니에 담기</PrimaryButton>
+            <SecondaryButton>구매하기</SecondaryButton>
+          </ButtonGroup>
+        </ProductInfo>
+      </ProductGrid>
+    </Container>
   );
 };
-
-const Main = styled.main`
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing[8]} 0;
-`;
 
 const ProductGrid = styled.div`
   display: grid;

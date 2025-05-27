@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { Section, GridContainer } from '../styles/common/Container';
 import { Title, Subtitle, Price } from '../styles/common/Typography';
 import { Card, CardImage, CardContent, CardTitle } from '../styles/common/Card';
@@ -36,82 +34,58 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <LoadingMessage>상품을 불러오는 중...</LoadingMessage>
-        </Main>
-        <Footer />
-      </>
-    );
+    return <LoadingMessage>상품을 불러오는 중...</LoadingMessage>;
   }
 
   if (error) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <ErrorMessage>{error}</ErrorMessage>
-        </Main>
-        <Footer />
-      </>
-    );
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   return (
     <>
-      <Header />
-      <Main>
-        <Banner>
-          <BannerContent>
-            <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
-            <BannerSubtitle>{SITE_CONFIG.description}</BannerSubtitle>
-          </BannerContent>
-        </Banner>
+      <Banner>
+        <BannerContent>
+          <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
+          <BannerSubtitle>{SITE_CONFIG.description}</BannerSubtitle>
+        </BannerContent>
+      </Banner>
 
-        <Section>
-          <Title>인기 상품</Title>
-          <GridContainer>
-            {popularProducts.map((product) => (
-              <Card key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <CardImage src={product.image} />
-                  <CardContent>
-                    <CardTitle>{product.name}</CardTitle>
-                    <Price>₩{Number(product.price).toLocaleString()}</Price>
-                  </CardContent>
-                </Link>
-              </Card>
-            ))}
-          </GridContainer>
-        </Section>
+      <Section>
+        <Title>인기 상품</Title>
+        <GridContainer>
+          {popularProducts.map((product) => (
+            <Card key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <CardImage src={product.image} />
+                <CardContent>
+                  <CardTitle>{product.name}</CardTitle>
+                  <Price>₩{Number(product.price).toLocaleString()}</Price>
+                </CardContent>
+              </Link>
+            </Card>
+          ))}
+        </GridContainer>
+      </Section>
 
-        <Section>
-          <Title>신상품</Title>
-          <GridContainer>
-            {newProducts.map((product) => (
-              <Card key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <CardImage src={product.image} />
-                  <CardContent>
-                    <CardTitle>{product.name}</CardTitle>
-                    <Price>₩{Number(product.price).toLocaleString()}</Price>
-                  </CardContent>
-                </Link>
-              </Card>
-            ))}
-          </GridContainer>
-        </Section>
-      </Main>
-      <Footer />
+      <Section>
+        <Title>신상품</Title>
+        <GridContainer>
+          {newProducts.map((product) => (
+            <Card key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <CardImage src={product.image} />
+                <CardContent>
+                  <CardTitle>{product.name}</CardTitle>
+                  <Price>₩{Number(product.price).toLocaleString()}</Price>
+                </CardContent>
+              </Link>
+            </Card>
+          ))}
+        </GridContainer>
+      </Section>
     </>
   );
 };
-
-const Main = styled.main`
-  min-height: 100vh;
-`;
 
 const LoadingMessage = styled.div`
   display: flex;
