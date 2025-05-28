@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { ClipLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 import { Container } from '../styles/common/Container';
 import { Title, Subtitle, Price } from '../styles/common/Typography';
 import useProductStore from '../store/productStore';
@@ -14,47 +16,84 @@ const ProductDetail = () => {
     error, 
     fetchProduct 
   } = useProductStore();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    fetchProduct(id);
+    const loadProduct = async () => {
+      try {
+        await fetchProduct(id);
+        // 데이터 로딩이 완료된 후 컨텐츠를 부드럽게 표시
+        setTimeout(() => setIsVisible(true), 100);
+      } catch (error) {
+        const errorMessage = '상품 정보를 불러오는데 실패했습니다.';
+        toast.error(errorMessage);
+        console.error('Error loading product:', error);
+      }
+    };
+
+    loadProduct();
     return () => {
       useProductStore.getState().resetProduct();
     };
   }, [id, fetchProduct]);
 
   if (loading) {
-    return <LoadingMessage>상품 정보를 불러오는 중...</LoadingMessage>;
+    return (
+      <LoadingContainer>
+        <ClipLoader
+          color={({ theme }) => theme.colors.primary}
+          size={50}
+          aria-label="Loading Spinner"
+        />
+      </LoadingContainer>
+    );
   }
 
   if (error) {
-    return <ErrorMessage>{error}</ErrorMessage>;
+    return null;
   }
 
   if (!product) {
-    return <ErrorMessage>상품을 찾을 수 없습니다.</ErrorMessage>;
+    toast.error('상품을 찾을 수 없습니다.');
+    return null;
   }
 
   return (
-    <Container>
-      <ProductGrid>
-        <ProductImage src={product.image} alt={product.name} />
-        <ProductInfo>
-          <Title>{product.name}</Title>
-          <Price>₩{Number(product.price).toLocaleString()}</Price>
-          <Rating>
-            평점: {product.rating} ({product.reviewCount}개의 리뷰)
-          </Rating>
-          <Description>{product.description}</Description>
-          <Category>카테고리: {product.category}</Category>
-          <ButtonGroup>
-            <PrimaryButton>장바구니에 담기</PrimaryButton>
-            <SecondaryButton>구매하기</SecondaryButton>
-          </ButtonGroup>
-        </ProductInfo>
-      </ProductGrid>
-    </Container>
+    <ContentWrapper $isVisible={isVisible}>
+      <Container>
+        <ProductGrid>
+          <ProductImage src={product.image} alt={product.name} />
+          <ProductInfo>
+            <Title>{product.name}</Title>
+            <Price>₩{Number(product.price).toLocaleString()}</Price>
+            <Rating>
+              평점: {product.rating} ({product.reviewCount}개의 리뷰)
+            </Rating>
+            <Description>{product.description}</Description>
+            <Category>카테고리: {product.category}</Category>
+            <ButtonGroup>
+              <PrimaryButton>장바구니에 담기</PrimaryButton>
+              <SecondaryButton>구매하기</SecondaryButton>
+            </ButtonGroup>
+          </ProductInfo>
+        </ProductGrid>
+      </Container>
+    </ContentWrapper>
   );
 };
+
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled.div`
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+  transform: translateY(${({ $isVisible }) => ($isVisible ? '0' : '20px')});
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+`;
 
 const ProductGrid = styled.div`
   display: grid;
@@ -130,19 +169,6 @@ const SecondaryButton = styled(Button)`
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryLight};
   }
-`;
-
-const LoadingMessage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  color: ${({ theme }) => theme.colors.gray[600]};
-`;
-
-const ErrorMessage = styled(LoadingMessage)`
-  color: ${({ theme }) => theme.colors.error};
 `;
 
 export default ProductDetail; 

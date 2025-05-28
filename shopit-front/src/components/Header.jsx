@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { media } from '../styles/common/MediaQueries';
-import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../config/site';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // 메뉴가 열려있을 때 body 스크롤 방지
 
+  // 메뉴가 열려있을 때 body 스크롤 방지
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -24,22 +24,11 @@ const Header = () => {
     <HeaderContainer>
       <HeaderWrapper>
         <Logo to="/">{SITE_CONFIG.name}</Logo>
+
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} />
-        <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
 
+        {/* <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} /> */}
         <MobileMenu $isOpen={isMenuOpen}>
-          <Nav>
-            <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
-              홈
-            </NavItem>
-            <NavItem to="/products" onClick={() => setIsMenuOpen(false)}>
-              상품
-            </NavItem>
-            <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
-              장바구니
-            </NavItem>
-          </Nav>
-
           <UserMenu>
             <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
               로그인
@@ -48,18 +37,29 @@ const Header = () => {
               회원가입
             </NavItem>
           </UserMenu>
-
-          <DesktopNav>
-            <NavItem to="/">홈</NavItem>
-            <NavItem to="/products">상품</NavItem>
-            <NavItem to="/cart">장바구니</NavItem>
-          </DesktopNav>
-
-          <DesktopUserMenu>
-            <NavItem to="/login">로그인</NavItem>
-            <NavItem to="/signup">회원가입</NavItem>
-          </DesktopUserMenu>
+          <Nav>
+            <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
+              홈
+            </NavItem>
+            <NavItem to="/products" onClick={() => setIsMenuOpen(false)}>
+              상품
+            </NavItem>
+            <NavItem to="/question" onClick={() => setIsMenuOpen(false)}>
+              QnA게시판
+            </NavItem>
+          </Nav>
         </MobileMenu>
+
+        <DesktopNav>
+          <NavItem to="/">홈</NavItem>
+          <NavItem to="/products">상품</NavItem>
+          <NavItem to="/question">QnA게시판</NavItem>
+        </DesktopNav>
+
+        <DesktopUserMenu>
+          <NavItem to="/login">로그인</NavItem>
+          <NavItem to="/signup">회원가입</NavItem>
+        </DesktopUserMenu>
       </HeaderWrapper>
     </HeaderContainer>
   );
@@ -67,26 +67,26 @@ const Header = () => {
 
 const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.colors.white};
-  /* box-shadow: ${({ theme }) => theme.shadows.sm}; */
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   position: sticky;
   top: 0;
   z-index: ${({ theme }) => theme.zIndices.sticky};
 `;
 
 const HeaderWrapper = styled.div`
-  width: 100%;
+  /* max-width: 1200px;
+  margin: 0 auto; */
   padding: ${({ theme }) => theme.spacing[4]};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  /* position: relative; */
 `;
 
 const Logo = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.primary};
-  outline: none;
 
   ${media.md`
     font-size: ${({ theme }) => theme.fontSizes['2xl']};
@@ -114,9 +114,10 @@ const MobileMenuOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-  transition: visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   z-index: 4;
-  background: blueviolet;
 
   ${media.md`
     display: none;
@@ -134,6 +135,8 @@ const MobileMenu = styled.div`
   max-width: 400px;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing[4]};
+  padding-top: ${({ theme }) => theme.spacing[16]};
   transform: translateX(${({ $isOpen }) => ($isOpen ? '0' : '100%')});
   transition: transform 0.3s ease;
   z-index: 5;

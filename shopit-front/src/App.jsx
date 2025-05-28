@@ -4,15 +4,18 @@ import './App.css';
 import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Layout>
       </Router>
     </ThemeProvider>
   );

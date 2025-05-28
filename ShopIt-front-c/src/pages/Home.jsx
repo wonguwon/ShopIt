@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 import { Section, GridContainer } from '../styles/common/Container';
 import { Title, Subtitle, Price } from '../styles/common/Typography';
 import { Card, CardImage, CardContent, CardTitle } from '../styles/common/Card';
@@ -13,6 +15,7 @@ const Home = () => {
   const [newProducts, setNewProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -23,10 +26,13 @@ const Home = () => {
         setNewProducts(products.filter(product => product.isNew));
         setError(null);
       } catch (error) {
-        setError('상품을 불러오는데 실패했습니다.');
+        const errorMessage = '상품을 불러오는데 실패했습니다.';
+        setError(errorMessage);
+        toast.error(errorMessage);
         console.error('Error loading products:', error);
       } finally {
         setLoading(false);
+        setTimeout(() => setIsVisible(true), 100);
       }
     };
 
@@ -34,15 +40,23 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <LoadingMessage>상품을 불러오는 중...</LoadingMessage>;
+    return (
+      <LoadingContainer>
+        <ClipLoader
+          color={({ theme }) => theme.colors.primary}
+          size={50}
+          aria-label="Loading Spinner"
+        />
+      </LoadingContainer>
+    );
   }
 
   if (error) {
-    return <ErrorMessage>{error}</ErrorMessage>;
+    return null;
   }
 
   return (
-    <>
+    <ContentWrapper $isVisible={isVisible}>
       <Banner>
         <BannerContent>
           <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
@@ -83,21 +97,21 @@ const Home = () => {
           ))}
         </GridContainer>
       </Section>
-    </>
+    </ContentWrapper>
   );
 };
 
-const LoadingMessage = styled.div`
+const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  color: ${({ theme }) => theme.colors.gray[600]};
 `;
 
-const ErrorMessage = styled(LoadingMessage)`
-  color: ${({ theme }) => theme.colors.error};
+const ContentWrapper = styled.div`
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+  transform: translateY(${({ $isVisible }) => ($isVisible ? '0' : '20px')});
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 `;
 
 const Banner = styled.div`

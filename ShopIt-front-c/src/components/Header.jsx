@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { media } from '../styles/common/MediaQueries';
 import { SITE_CONFIG } from '../config/site';
 
@@ -24,11 +25,7 @@ const Header = () => {
       <HeaderWrapper>
         <Logo to="/">{SITE_CONFIG.name}</Logo>
         
-        <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </MenuButton>
+        <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} />
 
         <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
         <MobileMenu $isOpen={isMenuOpen}>
@@ -87,24 +84,11 @@ const Logo = styled(Link)`
   `}
 `;
 
-const MenuButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 20px;
-  background: none;
-  border: none;
+const MenuButton = styled(GiHamburgerMenu)`
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  padding: 0;
   z-index: 10;
-
-  span {
-    width: 100%;
-    height: 2px;
-    background-color: ${({ theme }) => theme.colors.gray[900]};
-    transition: all 0.3s ease;
-  }
 
   ${media.md`
     display: none;
