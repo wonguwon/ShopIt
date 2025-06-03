@@ -39,8 +39,8 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: ${({ theme }) => theme.spacing[3]};
-  border: 1px solid ${({ theme, $error }) => 
-    $error ? theme.colors.danger : theme.colors.gray[300]};
+  border: 1px solid
+    ${({ theme, $error }) => ($error ? theme.colors.danger : theme.colors.gray[300])};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.fontSizes.base};
   transition: all 0.2s ease;
@@ -64,6 +64,7 @@ export const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.span`
+  text-align: left;
   color: ${({ theme }) => theme.colors.danger};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   margin-top: ${({ theme }) => theme.spacing[1]};

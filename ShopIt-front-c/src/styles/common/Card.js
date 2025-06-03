@@ -2,11 +2,9 @@ import styled from 'styled-components';
 import { media } from './MediaQueries';
 
 export const Card = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: ${({ theme }) => theme.borderRadius.base};
-  overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.sm};
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   ${media.md`
     border-radius: ${({ theme }) => theme.borderRadius.lg};
@@ -22,7 +20,7 @@ export const CardImage = styled.div`
   width: 100%;
   height: 160px;
   background-color: ${({ theme }) => theme.colors.gray[200]};
-  background-image: ${({ src }) => src ? `url(${src})` : 'none'};
+  background-image: ${({ src }) => (src ? `url(${src})` : 'none')};
   background-size: cover;
   background-position: center;
 
@@ -59,4 +57,4 @@ export const CardText = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.base};
     margin-bottom: ${({ theme }) => theme.spacing[4]};
   `}
-`; 
+`;

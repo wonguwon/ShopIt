@@ -55,7 +55,6 @@ export const useSignUpForm = () => {
       // 이메일 중복 체크 (DB에 같은 이메일이 있는지 확인)
       console.log(data);
       const isEmailDuplicate = await userService.checkEmailDuplicate(data.email);
-      console.log('성공입니다.');
 
       if (isEmailDuplicate) {
         toast.error('이미 사용 중인 이메일입니다.'); // 사용자에게 알림

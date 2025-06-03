@@ -1,29 +1,28 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
-import { toast } from 'react-toastify';
 import { Section, GridContainer } from '../styles/common/Container';
-import { Title, Subtitle, Price } from '../styles/common/Typography';
+import { Title, Price } from '../styles/common/Typography';
 import { Card, CardImage, CardContent, CardTitle } from '../styles/common/Card';
 import { productService } from '../api/products';
 import { media } from '../styles/common/MediaQueries';
 import { SITE_CONFIG } from '../config/site';
+import { toast } from 'react-toastify';
+import { ClipLoader } from 'react-spinners';
 
 const Home = () => {
   const [popularProducts, setPopularProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         setLoading(true);
         const products = await productService.getProducts();
-        setPopularProducts(products.filter(product => product.isPopular));
-        setNewProducts(products.filter(product => product.isNew));
+        setPopularProducts(products.filter((product) => product.isPopular));
+        setNewProducts(products.filter((product) => product.isNew));
         setError(null);
       } catch (error) {
         const errorMessage = '상품을 불러오는데 실패했습니다.';
@@ -32,7 +31,6 @@ const Home = () => {
         console.error('Error loading products:', error);
       } finally {
         setLoading(false);
-        setTimeout(() => setIsVisible(true), 100);
       }
     };
 
@@ -52,16 +50,16 @@ const Home = () => {
   }
 
   if (error) {
-    return null;
+    return null; // toast로 에러를 표시하므로 별도의 에러 UI는 필요 없음
   }
 
   return (
-    <ContentWrapper $isVisible={isVisible}>
+    <>
       <Banner>
-        <BannerContent>
+        <div>
           <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
           <BannerSubtitle>{SITE_CONFIG.description}</BannerSubtitle>
-        </BannerContent>
+        </div>
       </Banner>
 
       <Section>
@@ -97,7 +95,7 @@ const Home = () => {
           ))}
         </GridContainer>
       </Section>
-    </ContentWrapper>
+    </>
   );
 };
 
@@ -108,24 +106,16 @@ const LoadingContainer = styled.div`
   min-height: 100vh;
 `;
 
-const ContentWrapper = styled.div`
-  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
-  transform: translateY(${({ $isVisible }) => ($isVisible ? '0' : '20px')});
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-`;
-
 const Banner = styled.div`
-  background: linear-gradient(45deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.info});
+  background: linear-gradient(
+    50deg,
+    ${({ theme }) => theme.colors.primary},
+    ${({ theme }) => theme.colors.info}
+  );
   padding: ${({ theme }) => theme.spacing[16]} 0;
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
   margin-bottom: ${({ theme }) => theme.spacing[8]};
-`;
-
-const BannerContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing[4]};
 `;
 
 const BannerTitle = styled.h1`
@@ -140,11 +130,10 @@ const BannerTitle = styled.h1`
 
 const BannerSubtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.base};
-  opacity: 0.9;
 
   ${media.md`
     font-size: ${({ theme }) => theme.fontSizes.xl};
   `}
 `;
 
-export default Home; 
+export default Home;

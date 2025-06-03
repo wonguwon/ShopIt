@@ -71,4 +71,4 @@ export const Section = styled.section`
   ${media.lg`
     padding: ${({ theme }) => theme.spacing[10]} ${({ theme }) => theme.spacing[4]};
   `}
-`; 
+`;

@@ -1,23 +1,13 @@
-import dotenv from 'dotenv';
-
-// .env 파일 로드
-dotenv.config();
-
-const {
-  VITE_API_URL,
-  VITE_API_TIMEOUT = 5000,
-  VITE_API_VERSION = 'v1'
-} = process.env;
+const { VITE_API_URL, VITE_API_TIMEOUT = 5000, VITE_API_VERSION = 'v1' } = import.meta.env;
 
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
-  TIMEOUT: 5000,
-  VERSION: VITE_API_VERSION,
+  // BASE_URL: `${VITE_API_URL}/${VITE_API_VERSION}`,
+  BASE_URL: `${VITE_API_URL}/`,
+  TIMEOUT: VITE_API_TIMEOUT,
   HEADERS: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'X-API-Version': VITE_API_VERSION
-  }
+    'Content-Type': 'application/json', //내가 서버에 보내는 데이터의 형식은 JSON
+    Accept: 'application/json', //너도 JSON으로 응답해줘
+  },
 };
 
 export const API_ENDPOINTS = {
@@ -25,17 +15,18 @@ export const API_ENDPOINTS = {
     BASE: '/products',
     DETAIL: (id) => `/products/${id}`,
     SEARCH: (query) => `/products/search?q=${query}`,
-    CATEGORY: (category) => `/products/category/${category}`
+    CATEGORY: (category) => `/products/category/${category}`,
   },
   USERS: {
     BASE: '/users',
-    LOGIN: '/users/login',
+    // LOGIN: '/users/login',
+    LOGIN: (email, password) => `/users?email=${email}&password=${password}`,
     PROFILE: '/users/profile',
-    CHECK_EMAIL: (email) => `/users?email=${email}`
+    CHECK_EMAIL: (email) => `/users?email=${email}`,
   },
   ORDERS: {
     BASE: '/orders',
     DETAIL: (id) => `/orders/${id}`,
-    USER: (userId) => `/orders/user/${userId}`
-  }
-}; 
+    USER: (userId) => `/orders/user/${userId}`,
+  },
+};

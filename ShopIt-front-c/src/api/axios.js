@@ -29,7 +29,7 @@ api.interceptors.response.use(
     if (error.response) {
       // 서버가 응답을 반환한 경우
       const { status, data } = error.response;
-      
+
       switch (status) {
         case 401:
           // 인증 에러 처리
@@ -60,4 +60,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api; 
+export default api;

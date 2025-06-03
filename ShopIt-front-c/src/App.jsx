@@ -1,14 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import GlobalStyle from './styles/GlobalStyle';
-import theme from './styles/theme';
-import Layout from './components/Layout';
-import Home from './pages/Home';
-import ProductDetail from './pages/ProductDetail';
-import SignUp from './pages/SignUp';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import theme from './styles/theme';
+import GlobalStyle from './styles/GlobalStyle';
+import Home from './pages/Home';
+import Layout from './components/Layout';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -18,8 +17,8 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Layout>
       </Router>

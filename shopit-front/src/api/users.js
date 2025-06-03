@@ -37,9 +37,9 @@ export const userService = {
   },
 
   // 로그인
-  login: async (credentials) => {
+  login: async (email, password) => {
     try {
-      const { data } = await api.post(API_ENDPOINTS.USERS.LOGIN, credentials);
+      const { data } = await api.get(API_ENDPOINTS.USERS.LOGIN(email, password));
       return data;
     } catch (error) {
       if (error.response) {

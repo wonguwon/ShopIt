@@ -23,7 +23,8 @@ export const productService = {
       return data;
     } catch (error) {
       if (error.response) {
-        const errorMessage = error.response.data.message || '상품 상세 정보를 불러오는데 실패했습니다.';
+        const errorMessage =
+          error.response.data.message || '상품 상세 정보를 불러오는데 실패했습니다.';
         throw new Error(errorMessage);
       }
       throw new Error('서버와의 통신에 실패했습니다.');
@@ -51,10 +52,11 @@ export const productService = {
       return data;
     } catch (error) {
       if (error.response) {
-        const errorMessage = error.response.data.message || '카테고리별 상품을 불러오는데 실패했습니다.';
+        const errorMessage =
+          error.response.data.message || '카테고리별 상품을 불러오는데 실패했습니다.';
         throw new Error(errorMessage);
       }
       throw new Error('서버와의 통신에 실패했습니다.');
     }
-  }
-}; 
+  },
+};

@@ -5,7 +5,7 @@ export const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.gray[900]};
-  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
 
   ${media.md`
     font-size: ${({ theme }) => theme.fontSizes['3xl']};
@@ -55,4 +55,4 @@ export const Price = styled.span`
   ${media.md`
     font-size: ${({ theme }) => theme.fontSizes.base};
   `}
-`; 
+`;

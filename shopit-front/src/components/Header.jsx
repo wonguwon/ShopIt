@@ -1,12 +1,23 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { media } from '../styles/common/MediaQueries';
 import { SITE_CONFIG } from '../config/site';
+import useUserStore from '../store/userStore';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    toast.success('로그아웃되었습니다.');
+    navigate('/login');
+    setIsMenuOpen(false);
+  };
 
   // 메뉴가 열려있을 때 body 스크롤 방지
   useEffect(() => {
@@ -30,12 +41,31 @@ const Header = () => {
         {/* <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} /> */}
         <MobileMenu $isOpen={isMenuOpen}>
           <UserMenu>
-            <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
-              로그인
-            </NavItem>
-            <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
-              회원가입
-            </NavItem>
+            {isAuthenticated ? (
+              <>
+                <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
+                  장바구니
+                </NavItem>
+                <NavItem to="/orders" onClick={() => setIsMenuOpen(false)}>
+                  주문내역
+                </NavItem>
+                <NavItem to="/profile" onClick={() => setIsMenuOpen(false)}>
+                  {user?.username}님
+                </NavItem>
+                <NavItem as="button" onClick={handleLogout}>
+                  로그아웃
+                </NavItem>
+              </>
+            ) : (
+              <>
+                <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
+                  로그인
+                </NavItem>
+                <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
+                  회원가입
+                </NavItem>
+              </>
+            )}
           </UserMenu>
           <Nav>
             <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
@@ -57,8 +87,21 @@ const Header = () => {
         </DesktopNav>
 
         <DesktopUserMenu>
-          <NavItem to="/login">로그인</NavItem>
-          <NavItem to="/signup">회원가입</NavItem>
+          {isAuthenticated ? (
+            <>
+              <NavItem to="/cart">장바구니</NavItem>
+              <NavItem to="/orders">주문내역</NavItem>
+              <NavItem to="/profile">{user?.username}님</NavItem>
+              <NavItem as="button" onClick={handleLogout}>
+                로그아웃
+              </NavItem>
+            </>
+          ) : (
+            <>
+              <NavItem to="/login">로그인</NavItem>
+              <NavItem to="/signup">회원가입</NavItem>
+            </>
+          )}
         </DesktopUserMenu>
       </HeaderWrapper>
     </HeaderContainer>

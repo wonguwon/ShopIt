@@ -1,5 +1,4 @@
 import { FaSpinner } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { useSignUpForm } from '../hooks/useSignUpForm';
 import {
   SignUpContainer,
@@ -10,16 +9,11 @@ import {
   Input,
   ErrorMessage,
   Button,
-  LoginLink
+  LoginLink,
 } from '../styles/SignUp.styles';
 
 const SignUp = () => {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    isSubmitting
-  } = useSignUpForm();
+  const { register, handleSubmit, errors, isSubmitting } = useSignUpForm();
 
   return (
     <SignUpContainer>
@@ -89,4 +83,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp; 
+export default SignUp;

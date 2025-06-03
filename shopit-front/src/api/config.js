@@ -19,7 +19,8 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     BASE: '/users',
-    LOGIN: '/users/login',
+    // LOGIN: '/users/login',
+    LOGIN: (email, password) => `/users?email=${email}&password=${password}`,
     PROFILE: '/users/profile',
     CHECK_EMAIL: (email) => `/users?email=${email}`,
   },
