@@ -6,17 +6,15 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <Content>
-        {children}
-      </Content>
+      <Content>{children}</Content>
       <Footer />
     </>
   );
 };
 
 const Content = styled.main`
-  min-height: 100vh;
+  min-height: calc(100vh - 68px);
   padding: ${({ theme }) => theme.spacing[8]} 0;
 `;
 
-export default Layout; 
+export default Layout;

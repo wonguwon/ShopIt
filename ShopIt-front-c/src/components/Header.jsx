@@ -24,27 +24,36 @@ const Header = () => {
     <HeaderContainer>
       <HeaderWrapper>
         <Logo to="/">{SITE_CONFIG.name}</Logo>
-        
+
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} />
 
-        <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
+        {/* <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} /> */}
         <MobileMenu $isOpen={isMenuOpen}>
-          <Nav>
-            <NavItem to="/" onClick={() => setIsMenuOpen(false)}>홈</NavItem>
-            <NavItem to="/products" onClick={() => setIsMenuOpen(false)}>상품</NavItem>
-            <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>장바구니</NavItem>
-          </Nav>
-
           <UserMenu>
-            <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>로그인</NavItem>
-            <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>회원가입</NavItem>
+            <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
+              로그인
+            </NavItem>
+            <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
+              회원가입
+            </NavItem>
           </UserMenu>
+          <Nav>
+            <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
+              홈
+            </NavItem>
+            <NavItem to="/products" onClick={() => setIsMenuOpen(false)}>
+              상품
+            </NavItem>
+            <NavItem to="/question" onClick={() => setIsMenuOpen(false)}>
+              QnA게시판
+            </NavItem>
+          </Nav>
         </MobileMenu>
 
         <DesktopNav>
           <NavItem to="/">홈</NavItem>
           <NavItem to="/products">상품</NavItem>
-          <NavItem to="/cart">장바구니</NavItem>
+          <NavItem to="/question">QnA게시판</NavItem>
         </DesktopNav>
 
         <DesktopUserMenu>
@@ -65,13 +74,13 @@ const HeaderContainer = styled.header`
 `;
 
 const HeaderWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  /* max-width: 1200px;
+  margin: 0 auto; */
   padding: ${({ theme }) => theme.spacing[4]};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  /* position: relative; */
 `;
 
 const Logo = styled(Link)`
@@ -105,7 +114,9 @@ const MobileMenuOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   z-index: 4;
 
   ${media.md`
@@ -124,7 +135,8 @@ const MobileMenu = styled.div`
   max-width: 400px;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
-  padding: ${({ theme }) => theme.spacing[16]} ${({ theme }) => theme.spacing[4]} ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  padding-top: ${({ theme }) => theme.spacing[16]};
   transform: translateX(${({ $isOpen }) => ($isOpen ? '0' : '100%')});
   transition: transform 0.3s ease;
   z-index: 5;
@@ -172,7 +184,7 @@ const NavItem = styled(Link)`
   color: ${({ theme }) => theme.colors.gray[700]};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme }) => theme.fontSizes.base};
-  
+
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { productService } from '../api/products';
 
-const useProductStore = create((set, get) => ({
+const useProductStore = create((set) => ({
   // 상태
   currentProduct: null,
   loading: false,
@@ -16,14 +16,14 @@ const useProductStore = create((set, get) => ({
     try {
       set({ loading: true, error: null });
       const product = await productService.getProductDetail(id);
-      set({ 
+      set({
         currentProduct: product,
-        loading: false 
+        loading: false,
       });
     } catch (error) {
-      set({ 
+      set({
         error: '상품 정보를 불러오는데 실패했습니다.',
-        loading: false 
+        loading: false,
       });
       console.error('Error fetching product:', error);
     }
@@ -33,4 +33,4 @@ const useProductStore = create((set, get) => ({
   resetProduct: () => set({ currentProduct: null }),
 }));
 
-export default useProductStore; 
+export default useProductStore;

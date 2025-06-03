@@ -7,6 +7,7 @@ import theme from './styles/theme';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
+import SignUp from './pages/SignUp';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </Layout>
       </Router>

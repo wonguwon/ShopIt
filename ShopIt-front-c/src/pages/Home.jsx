@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Section, GridContainer } from '../styles/common/Container';
 import { Title, Subtitle, Price } from '../styles/common/Typography';
 import { Card, CardImage, CardContent, CardTitle } from '../styles/common/Card';
-import { getProducts } from '../api/products';
+import { productService } from '../api/products';
 import { media } from '../styles/common/MediaQueries';
 import { SITE_CONFIG } from '../config/site';
 
@@ -21,7 +21,7 @@ const Home = () => {
     const loadProducts = async () => {
       try {
         setLoading(true);
-        const products = await getProducts();
+        const products = await productService.getProducts();
         setPopularProducts(products.filter(product => product.isPopular));
         setNewProducts(products.filter(product => product.isNew));
         setError(null);

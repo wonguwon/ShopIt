@@ -1,6 +1,31 @@
-export const API_BASE_URL = 'http://localhost:3001';
+const { VITE_API_URL, VITE_API_TIMEOUT = 5000, VITE_API_VERSION = 'v1' } = import.meta.env;
+
+export const API_CONFIG = {
+  // BASE_URL: `${VITE_API_URL}/${VITE_API_VERSION}`,
+  BASE_URL: `${VITE_API_URL}/`,
+  TIMEOUT: VITE_API_TIMEOUT,
+  HEADERS: {
+    'Content-Type': 'application/json', //내가 서버에 보내는 데이터의 형식은 JSON
+    Accept: 'application/json', //너도 JSON으로 응답해줘
+  },
+};
 
 export const API_ENDPOINTS = {
-  PRODUCTS: '/products',
-  PRODUCT_DETAIL: (id) => `/products/${id}`,
-}; 
+  PRODUCTS: {
+    BASE: '/products',
+    DETAIL: (id) => `/products/${id}`,
+    SEARCH: (query) => `/products/search?q=${query}`,
+    CATEGORY: (category) => `/products/category/${category}`,
+  },
+  USERS: {
+    BASE: '/users',
+    LOGIN: '/users/login',
+    PROFILE: '/users/profile',
+    CHECK_EMAIL: (email) => `/users?email=${email}`,
+  },
+  ORDERS: {
+    BASE: '/orders',
+    DETAIL: (id) => `/orders/${id}`,
+    USER: (userId) => `/orders/user/${userId}`,
+  },
+};
