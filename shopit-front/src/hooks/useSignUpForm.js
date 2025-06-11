@@ -53,17 +53,15 @@ export const useSignUpForm = () => {
   const onSubmit = async (data) => {
     try {
       // 이메일 중복 체크 (DB에 같은 이메일이 있는지 확인)
-      console.log(data);
       const isEmailDuplicate = await userService.checkEmailDuplicate(data.email);
 
       if (isEmailDuplicate) {
-        toast.error('이미 사용 중인 이메일입니다.'); // 사용자에게 알림
+        toast.error('이미 사용 중인 이메일입니다.');
         setError('email', {
-          // email 필드에 수동 에러 추가
           type: 'manual',
           message: '이미 사용 중인 이메일입니다.',
         });
-        return; // 진행 중단
+        return;
       }
 
       // 중복이 아니면 회원가입 API 호출
@@ -71,13 +69,15 @@ export const useSignUpForm = () => {
         username: data.username,
         email: data.email,
         password: data.password,
+        role: 'user',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       });
 
       // 성공 알림 후 로그인 페이지로 이동
       toast.success('회원가입이 완료되었습니다!');
       navigate('/login');
     } catch (error) {
-      // 예외 발생 시 오류 메시지 출력
       toast.error('회원가입 중 오류가 발생했습니다.');
       console.error('회원가입 에러:', error);
     }

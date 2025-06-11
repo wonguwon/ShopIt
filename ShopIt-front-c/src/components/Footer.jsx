@@ -37,7 +37,6 @@ const Footer = () => {
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.colors.gray[100]};
   padding: ${({ theme }) => theme.spacing[8]} 0;
-  margin-top: ${({ theme }) => theme.spacing[8]};
 `;
 
 const FooterWrapper = styled.div`

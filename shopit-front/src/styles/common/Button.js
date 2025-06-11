@@ -45,4 +45,41 @@ export const TextButton = styled(Button)`
   &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.primary}11;
   }
+`;
+
+export const FullWidthIconButton = styled(Button)`
+  width: 100%;
+  margin-top: ${({ theme }) => theme.spacing[4]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing[2]};
+`;
+
+export const IconButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid ${({ theme, variant }) => 
+    variant === 'danger' ? theme.colors.danger : theme.colors.gray[300]};
+  border-radius: 4px;
+  background-color: ${({ theme, variant }) => 
+    variant === 'danger' ? theme.colors.danger : theme.colors.white};
+  color: ${({ theme, variant }) => 
+    variant === 'danger' ? theme.colors.white : theme.colors.gray[600]};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: ${({ theme, variant }) => 
+      variant === 'danger' ? theme.colors.danger + 'dd' : theme.colors.gray[100]};
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `; 

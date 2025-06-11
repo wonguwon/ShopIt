@@ -54,7 +54,7 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div>
       <Banner>
         <div>
           <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
@@ -95,7 +95,7 @@ const Home = () => {
           ))}
         </GridContainer>
       </Section>
-    </>
+    </div>
   );
 };
 

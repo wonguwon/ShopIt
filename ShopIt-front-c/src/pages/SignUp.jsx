@@ -1,7 +1,7 @@
 import { FaSpinner } from 'react-icons/fa';
 import { useSignUpForm } from '../hooks/useSignUpForm';
 import {
-  SignUpContainer,
+  AuthContainer,
   Title,
   Form,
   InputGroup,
@@ -9,14 +9,14 @@ import {
   Input,
   ErrorMessage,
   Button,
-  LoginLink,
-} from '../styles/SignUp.styles';
+  AuthLink,
+} from '../styles/Auth.styles';
 
 const SignUp = () => {
   const { register, handleSubmit, errors, isSubmitting } = useSignUpForm();
 
   return (
-    <SignUpContainer>
+    <AuthContainer>
       <Title>회원가입</Title>
       <Form onSubmit={handleSubmit}>
         <InputGroup>
@@ -78,8 +78,8 @@ const SignUp = () => {
           )}
         </Button>
       </Form>
-      <LoginLink to="/login">이미 계정이 있으신가요? 로그인하기</LoginLink>
-    </SignUpContainer>
+      <AuthLink to="/login">이미 계정이 있으신가요? 로그인하기</AuthLink>
+    </AuthContainer>
   );
 };
 

@@ -1,51 +1,57 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useLoginForm } from '../hooks/useLoginForm';
 import {
-  LoginContainer,
-  LoginForm,
+  AuthContainer,
   Title,
+  Form,
+  InputGroup,
+  Label,
   Input,
-  Button,
-  SignUpLink,
   ErrorMessage,
-} from '../styles/Login.styles';
+  Button,
+  AuthLink,
+} from '../styles/Auth.styles';
 
 const Login = () => {
   const { register, handleSubmit, errors, isLoading, error, onSubmit } = useLoginForm();
 
   return (
-    <LoginContainer>
-      <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <Title>로그인</Title>
-
+    <AuthContainer>
+      <Title>로그인</Title>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <Input
-          type="email"
-          placeholder="이메일"
-          {...register('email')}
-          aria-invalid={errors.email ? 'true' : 'false'}
-        />
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        <InputGroup>
+          <Label htmlFor="email">이메일</Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="이메일을 입력하세요"
+            {...register('email')}
+            $error={errors.email}
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </InputGroup>
 
-        <Input
-          type="password"
-          placeholder="비밀번호"
-          {...register('password')}
-          aria-invalid={errors.password ? 'true' : 'false'}
-        />
-        {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+        <InputGroup>
+          <Label htmlFor="password">비밀번호</Label>
+          <Input
+            id="password"
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            {...register('password')}
+            $error={errors.password}
+          />
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+        </InputGroup>
 
         <Button type="submit" disabled={isLoading}>
           {isLoading ? '로그인 중...' : '로그인'}
         </Button>
 
-        <SignUpLink>
-          계정이 없으신가요? <Link to="/signup">회원가입</Link>
-        </SignUpLink>
-      </LoginForm>
-    </LoginContainer>
+        <AuthLink to="/signup">계정이 없으신가요? 회원가입</AuthLink>
+      </Form>
+    </AuthContainer>
   );
 };
 

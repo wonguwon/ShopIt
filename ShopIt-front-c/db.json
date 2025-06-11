@@ -103,21 +103,24 @@
       "username": "홍길동",
       "email": "hong@example.com",
       "password": "password123",
-      "createdAt": "2024-01-01T00:00:00.000Z"
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
     },
     {
       "id": 2,
       "username": "김철수",
       "email": "kim@example.com",
       "password": "password123",
-      "createdAt": "2024-01-02T00:00:00.000Z"
+      "createdAt": "2024-01-02T00:00:00.000Z",
+      "updatedAt": "2024-01-02T00:00:00.000Z"
     },
     {
       "id": 3,
       "username": "이영희",
       "email": "lee@example.com",
       "password": "password123",
-      "createdAt": "2024-01-03T00:00:00.000Z"
+      "createdAt": "2024-01-03T00:00:00.000Z",
+      "updatedAt": "2024-01-03T00:00:00.000Z"
     }
   ]
 }

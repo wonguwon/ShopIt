@@ -7,21 +7,6 @@ const api = axios.create({
   headers: API_CONFIG.HEADERS,
 });
 
-// 요청 인터셉터
-api.interceptors.request.use(
-  (config) => {
-    // 토큰이 있다면 헤더에 추가
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 // 응답 인터셉터
 api.interceptors.response.use(
   (response) => response,
@@ -33,7 +18,6 @@ api.interceptors.response.use(
       switch (status) {
         case 401:
           // 인증 에러 처리
-          localStorage.removeItem('token');
           window.location.href = '/login';
           break;
         case 403:

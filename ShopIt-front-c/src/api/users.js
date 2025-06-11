@@ -50,15 +50,27 @@ export const userService = {
     }
   },
 
-  // 프로필 조회
-  getProfile: async () => {
+  // 프로필 수정
+  updateProfile: async (id, newUserData) => {
     try {
-      const { data } = await api.get(API_ENDPOINTS.USERS.PROFILE);
+      const { data } = await api.patch(API_ENDPOINTS.USERS.EDIT(id), newUserData);
       return data;
     } catch (error) {
       if (error.response) {
-        const errorMessage =
-          error.response.data.message || '프로필 정보를 불러오는데 실패했습니다.';
+        const errorMessage = error.response.data.message || '프로필 수정에 실패했습니다.';
+        throw new Error(errorMessage);
+      }
+      throw new Error('서버와의 통신에 실패했습니다.');
+    }
+  },
+
+  // 회원 탈퇴
+  deleteAccount: async (userId) => {
+    try {
+      await api.delete(API_ENDPOINTS.USERS.DELETE(userId));
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message || '회원 탈퇴에 실패했습니다.';
         throw new Error(errorMessage);
       }
       throw new Error('서버와의 통신에 실패했습니다.');

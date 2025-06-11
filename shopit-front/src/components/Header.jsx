@@ -40,33 +40,12 @@ const Header = () => {
 
         {/* <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} /> */}
         <MobileMenu $isOpen={isMenuOpen}>
-          <UserMenu>
-            {isAuthenticated ? (
-              <>
-                <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
-                  장바구니
-                </NavItem>
-                <NavItem to="/orders" onClick={() => setIsMenuOpen(false)}>
-                  주문내역
-                </NavItem>
-                <NavItem to="/profile" onClick={() => setIsMenuOpen(false)}>
-                  {user?.username}님
-                </NavItem>
-                <NavItem as="button" onClick={handleLogout}>
-                  로그아웃
-                </NavItem>
-              </>
-            ) : (
-              <>
-                <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
-                  로그인
-                </NavItem>
-                <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
-                  회원가입
-                </NavItem>
-              </>
-            )}
-          </UserMenu>
+          {isAuthenticated && (
+            <UserProfile>
+              <UserName>{user?.username}님</UserName>
+            </UserProfile>
+          )}
+
           <Nav>
             <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
               홈
@@ -78,6 +57,29 @@ const Header = () => {
               QnA게시판
             </NavItem>
           </Nav>
+
+          {isAuthenticated ? (
+            <UserMenu>
+              <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
+                장바구니
+              </NavItem>
+              <NavItem to="/orders" onClick={() => setIsMenuOpen(false)}>
+                주문내역
+              </NavItem>
+              <NavItem to="/profile" onClick={() => setIsMenuOpen(false)}>
+                회원정보
+              </NavItem>
+            </UserMenu>
+          ) : (
+            <UserMenu>
+              <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
+                로그인
+              </NavItem>
+              <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
+                회원가입
+              </NavItem>
+            </UserMenu>
+          )}
         </MobileMenu>
 
         <DesktopNav>
@@ -92,9 +94,6 @@ const Header = () => {
               <NavItem to="/cart">장바구니</NavItem>
               <NavItem to="/orders">주문내역</NavItem>
               <NavItem to="/profile">{user?.username}님</NavItem>
-              <NavItem as="button" onClick={handleLogout}>
-                로그아웃
-              </NavItem>
             </>
           ) : (
             <>
@@ -170,7 +169,6 @@ const MobileMenuOverlay = styled.div`
 const MobileMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
   position: fixed;
   top: 0;
   right: 0;
@@ -190,19 +188,58 @@ const MobileMenu = styled.div`
   `}
 `;
 
+const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+`;
+
+const UserName = styled.span`
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.gray[800]};
+`;
+
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
 `;
 
 const UserMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
-  margin-top: ${({ theme }) => theme.spacing[8]};
-  padding-top: ${({ theme }) => theme.spacing[8]};
-  border-top: 1px solid ${({ theme }) => theme.colors.gray[200]};
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+`;
+
+const NavItem = styled(Link)`
+  color: ${({ theme }) => theme.colors.gray[700]};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[3]};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.gray[100]};
+  }
+
+  ${media.md`
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    padding: 0;
+  `}
 `;
 
 const DesktopNav = styled.nav`
@@ -220,20 +257,6 @@ const DesktopUserMenu = styled.div`
 
   ${media.md`
     display: flex;
-  `}
-`;
-
-const NavItem = styled(Link)`
-  color: ${({ theme }) => theme.colors.gray[700]};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-size: ${({ theme }) => theme.fontSizes.base};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  ${media.md`
-    font-size: ${({ theme }) => theme.fontSizes.sm};
   `}
 `;
 

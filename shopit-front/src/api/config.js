@@ -14,19 +14,26 @@ export const API_ENDPOINTS = {
   PRODUCTS: {
     BASE: '/products',
     DETAIL: (id) => `/products/${id}`,
-    SEARCH: (query) => `/products/search?q=${query}`,
-    CATEGORY: (category) => `/products/category/${category}`,
+    SEARCH: (query) => `/products?q=${query}`,
+    CATEGORY: (category) => `/products?category=${category}`,
+  },
+  CART: {
+    BASE: '/cart',
+    ADD: '/cart',
+    UPDATE: (id) => `/cart/${id}`,
+    REMOVE: (id) => `/cart/${id}`,
   },
   USERS: {
     BASE: '/users',
     // LOGIN: '/users/login',
     LOGIN: (email, password) => `/users?email=${email}&password=${password}`,
-    PROFILE: '/users/profile',
+    DELETE: (email) => `/users/${email}`,
+    EDIT: (email) => `/users/${email}`,
     CHECK_EMAIL: (email) => `/users?email=${email}`,
   },
   ORDERS: {
     BASE: '/orders',
     DETAIL: (id) => `/orders/${id}`,
-    USER: (userId) => `/orders/user/${userId}`,
+    USER: (email) => `/orders/user/${email}`,
   },
 };

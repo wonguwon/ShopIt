@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Section, GridContainer } from '../styles/common/Container';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { Section, GridContainer, Container } from '../styles/common/Container';
 import { Title, Price } from '../styles/common/Typography';
 import { Card, CardImage, CardContent, CardTitle } from '../styles/common/Card';
+import { Button, FullWidthIconButton } from '../styles/common/Button';
 import { productService } from '../api/products';
+import { cartService } from '../api/cart';
 import { media } from '../styles/common/MediaQueries';
 import { SITE_CONFIG } from '../config/site';
 import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
+import useUserStore from '../store/userStore';
 
 const Home = () => {
   const [popularProducts, setPopularProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingItems, setLoadingItems] = useState({});
   const [error, setError] = useState(null);
+  const { isAuthenticated } = useUserStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -37,6 +44,37 @@ const Home = () => {
     loadProducts();
   }, []);
 
+  const handleAddToCart = async (product) => {
+    if (!isAuthenticated) {
+      toast.error('로그인이 필요한 서비스입니다.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      setLoadingItems(prev => ({ ...prev, [product.id]: true }));
+      
+      const cartItems = await cartService.getCartItems();
+      const existingItem = cartItems.find(item => item.productId === product.id);
+      
+      await cartService.addToCart(product.id, product.name, product.price);
+      
+      if (existingItem) {
+        toast.success(`${product.name}의 수량이 증가했습니다.`);
+      } else {
+        toast.success(`${product.name}이(가) 장바구니에 추가되었습니다.`);
+      }
+    } catch (error) {
+      if (error.message === '로그인이 필요한 서비스입니다.') {
+        navigate('/login');
+      }
+      toast.error(error.message);
+      console.error('Error adding to cart:', error);
+    } finally {
+      setLoadingItems(prev => ({ ...prev, [product.id]: false }));
+    }
+  };
+
   if (loading) {
     return (
       <LoadingContainer>
@@ -54,7 +92,7 @@ const Home = () => {
   }
 
   return (
-    <>
+    <Container>
       <Banner>
         <div>
           <BannerTitle>{SITE_CONFIG.name}</BannerTitle>
@@ -74,6 +112,19 @@ const Home = () => {
                   <Price>₩{Number(product.price).toLocaleString()}</Price>
                 </CardContent>
               </Link>
+              <FullWidthIconButton 
+                onClick={() => handleAddToCart(product)}
+                disabled={loadingItems[product.id]}
+              >
+                {loadingItems[product.id] ? (
+                  <ClipLoader size={16} color="#ffffff" />
+                ) : (
+                  <>
+                    <FaShoppingCart />
+                    장바구니에 추가
+                  </>
+                )}
+              </FullWidthIconButton>
             </Card>
           ))}
         </GridContainer>
@@ -91,11 +142,24 @@ const Home = () => {
                   <Price>₩{Number(product.price).toLocaleString()}</Price>
                 </CardContent>
               </Link>
+              <FullWidthIconButton 
+                onClick={() => handleAddToCart(product)}
+                disabled={loadingItems[product.id]}
+              >
+                {loadingItems[product.id] ? (
+                  <ClipLoader size={16} color="#ffffff" />
+                ) : (
+                  <>
+                    <FaShoppingCart />
+                    장바구니에 추가
+                  </>
+                )}
+              </FullWidthIconButton>
             </Card>
           ))}
         </GridContainer>
       </Section>
-    </>
+    </Container>
   );
 };
 

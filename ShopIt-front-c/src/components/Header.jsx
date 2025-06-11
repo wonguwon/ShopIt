@@ -7,12 +7,31 @@ import { SITE_CONFIG } from '../config/site';
 import useUserStore from '../store/userStore';
 import { toast } from 'react-toastify';
 
+/**
+ * 헤더 컴포넌트
+ * - 반응형 디자인을 위한 모바일/데스크톱 메뉴 구현
+ * - Zustand를 사용한 사용자 상태 관리
+ * - React Router를 통한 페이지 네비게이션
+ */
 const Header = () => {
+  // 모바일 메뉴 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Zustand store에서 사용자 정보와 인증 상태 가져오기
   const { user, isAuthenticated, logout } = useUserStore();
   const navigate = useNavigate();
 
-  // 메뉴가 열려있을 때 body 스크롤 방지
+  // 로그아웃 처리 함수
+  const handleLogout = () => {
+    logout();
+    toast.success('로그아웃되었습니다.');
+    navigate('/login');
+    setIsMenuOpen(false);
+  };
+
+  /**
+   * 모바일 메뉴가 열려있을 때 body 스크롤 방지
+   * useEffect를 사용하여 컴포넌트 마운트/언마운트 시 스크롤 상태 관리
+   */
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -24,49 +43,24 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
-  const handleLogout = () => {
-    logout();
-    toast.success('로그아웃되었습니다.');
-    navigate('/login');
-    setIsMenuOpen(false);
-  };
-
   return (
     <HeaderContainer>
       <HeaderWrapper>
         <Logo to="/">{SITE_CONFIG.name}</Logo>
 
+        {/* 모바일 메뉴 토글 버튼 */}
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} />
 
         {/* <MobileMenuOverlay $isOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} /> */}
         <MobileMenu $isOpen={isMenuOpen}>
-          <UserMenu>
-            {isAuthenticated ? (
-              <>
-                <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
-                  장바구니
-                </NavItem>
-                <NavItem to="/orders" onClick={() => setIsMenuOpen(false)}>
-                  주문내역
-                </NavItem>
-                <NavItem to="/profile" onClick={() => setIsMenuOpen(false)}>
-                  {user?.username}님
-                </NavItem>
-                <NavItem as="button" onClick={handleLogout}>
-                  로그아웃
-                </NavItem>
-              </>
-            ) : (
-              <>
-                <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
-                  로그인
-                </NavItem>
-                <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
-                  회원가입
-                </NavItem>
-              </>
-            )}
-          </UserMenu>
+          {/* 로그인 상태일 때만 사용자 프로필 표시 */}
+          {isAuthenticated && (
+            <UserProfile>
+              <UserName>{user?.username}님</UserName>
+            </UserProfile>
+          )}
+          
+          {/* 메인 네비게이션 메뉴 */}
           <Nav>
             <NavItem to="/" onClick={() => setIsMenuOpen(false)}>
               홈
@@ -78,23 +72,46 @@ const Header = () => {
               QnA게시판
             </NavItem>
           </Nav>
+
+          {/* 사용자 메뉴 - 로그인 상태에 따라 다른 메뉴 표시 */}
+          {isAuthenticated ? (
+            <UserMenu>
+              <NavItem to="/cart" onClick={() => setIsMenuOpen(false)}>
+                장바구니
+              </NavItem>
+              <NavItem to="/orders" onClick={() => setIsMenuOpen(false)}>
+                주문내역
+              </NavItem>
+              <NavItem to="/profile" onClick={() => setIsMenuOpen(false)}>
+                회원정보
+              </NavItem>
+            </UserMenu>
+          ) : (
+            <UserMenu>
+              <NavItem to="/login" onClick={() => setIsMenuOpen(false)}>
+                로그인
+              </NavItem>
+              <NavItem to="/signup" onClick={() => setIsMenuOpen(false)}>
+                회원가입
+              </NavItem>
+            </UserMenu>
+          )}
         </MobileMenu>
 
+        {/* 데스크톱 메인 네비게이션 */}
         <DesktopNav>
           <NavItem to="/">홈</NavItem>
           <NavItem to="/products">상품</NavItem>
           <NavItem to="/question">QnA게시판</NavItem>
         </DesktopNav>
 
+        {/* 데스크톱 사용자 메뉴 */}
         <DesktopUserMenu>
           {isAuthenticated ? (
             <>
               <NavItem to="/cart">장바구니</NavItem>
               <NavItem to="/orders">주문내역</NavItem>
               <NavItem to="/profile">{user?.username}님</NavItem>
-              <NavItem as="button" onClick={handleLogout}>
-                로그아웃
-              </NavItem>
             </>
           ) : (
             <>
@@ -170,7 +187,6 @@ const MobileMenuOverlay = styled.div`
 const MobileMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
   position: fixed;
   top: 0;
   right: 0;
@@ -190,19 +206,58 @@ const MobileMenu = styled.div`
   `}
 `;
 
+const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+`;
+
+const UserName = styled.span`
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.gray[800]};
+`;
+
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
 `;
 
 const UserMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing[4]};
-  margin-top: ${({ theme }) => theme.spacing[8]};
-  padding-top: ${({ theme }) => theme.spacing[8]};
-  border-top: 1px solid ${({ theme }) => theme.colors.gray[200]};
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[4]};
+  background-color: ${({ theme }) => theme.colors.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
+`;
+
+const NavItem = styled(Link)`
+  color: ${({ theme }) => theme.colors.gray[700]};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes.base};
+  padding: ${({ theme }) => theme.spacing[2]} ${({ theme }) => theme.spacing[3]};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.gray[100]};
+  }
+
+  ${media.md`
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    padding: 0;
+  `}
 `;
 
 const DesktopNav = styled.nav`
@@ -220,25 +275,6 @@ const DesktopUserMenu = styled.div`
 
   ${media.md`
     display: flex;
-  `}
-`;
-
-const NavItem = styled(Link)`
-  color: ${({ theme }) => theme.colors.gray[700]};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-size: ${({ theme }) => theme.fontSizes.base};
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  ${media.md`
-    font-size: ${({ theme }) => theme.fontSizes.sm};
   `}
 `;
 

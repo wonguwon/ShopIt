@@ -21,7 +21,8 @@ export const API_ENDPOINTS = {
     BASE: '/users',
     // LOGIN: '/users/login',
     LOGIN: (email, password) => `/users?email=${email}&password=${password}`,
-    PROFILE: '/users/profile',
+    DELETE: (id) => `/users/${id}`,
+    EDIT: (id) => `/users/${id}`,
     CHECK_EMAIL: (email) => `/users?email=${email}`,
   },
   ORDERS: {

@@ -71,6 +71,8 @@ export const useSignUpForm = () => {
         username: data.username,
         email: data.email,
         password: data.password,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       });
 
       // 성공 알림 후 로그인 페이지로 이동
