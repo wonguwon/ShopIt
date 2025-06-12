@@ -11,6 +11,9 @@ export const cartService = {
     }
 
     try {
+      // 상품 정보 가져오기
+      const { data: product } = await api.get(`${API_ENDPOINTS.PRODUCTS.BASE}/${productId}`);
+      
       const cartItems = await cartService.getCartItems();
       const existingItem = cartItems.find(item => item.productId === productId);
 
@@ -27,6 +30,7 @@ export const cartService = {
           productId,
           productName,
           price,
+          image: product.image, // 상품의 이미지 URL 저장
           email: user.email,
           quantity: 1,
           createdAt: new Date().toISOString(),

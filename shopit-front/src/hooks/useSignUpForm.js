@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { userService } from '../api/users';
 
-// ✅ 회원가입 폼의 유효성 검사 스키마 정의
+// 회원가입 폼의 유효성 검사 스키마 정의
 const signUpSchema = yup.object().shape({
   username: yup
     .string()
@@ -33,7 +33,7 @@ const signUpSchema = yup.object().shape({
     .required('비밀번호 확인을 입력해주세요.'),
 });
 
-// ✅ 회원가입 폼 로직을 캡슐화한 커스텀 훅
+// 회원가입 폼 로직을 캡슐화한 커스텀 훅
 export const useSignUpForm = () => {
   const navigate = useNavigate(); // 페이지 이동 함수 가져오기
 
@@ -49,7 +49,7 @@ export const useSignUpForm = () => {
     mode: 'onChange', // 입력 중에도 실시간 유효성 검사
   });
 
-  // ✅ 실제 제출 시 실행되는 함수
+  // 실제 제출 시 실행되는 함수
   const onSubmit = async (data) => {
     try {
       // 이메일 중복 체크 (DB에 같은 이메일이 있는지 확인)

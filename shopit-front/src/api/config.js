@@ -21,7 +21,7 @@ export const API_ENDPOINTS = {
     BASE: '/cart',
     ADD: '/cart',
     UPDATE: (id) => `/cart/${id}`,
-    REMOVE: (id) => `/cart/${id}`,
+    DELETE: (id) => `/cart/${id}`,
   },
   USERS: {
     BASE: '/users',
@@ -36,4 +36,11 @@ export const API_ENDPOINTS = {
     DETAIL: (id) => `/orders/${id}`,
     USER: (email) => `/orders/user/${email}`,
   },
+  QUESTIONS: {
+    BASE: '/questions',
+    DETAIL: (id) => `/questions/${id}`,
+    UPDATE: (id) => `/questions/${id}`,
+    DELETE: (id) => `/questions/${id}`,
+    SEARCH: (query) => `/questions?q=${query}`
+  }
 };

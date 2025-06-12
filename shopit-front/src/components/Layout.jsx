@@ -1,23 +1,28 @@
+import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 
+const LayoutContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Main = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
 const Layout = ({ children }) => {
   return (
-    <>
+    <LayoutContainer>
       <Header />
-      <Content>{children}</Content>
+      <Main>{children}</Main>
       <Footer />
-    </>
+    </LayoutContainer>
   );
 };
-
-const Content = styled.main`
-  min-height: calc(100vh - 68px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.spacing[8]} 0;
-`;
 
 export default Layout;

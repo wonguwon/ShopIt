@@ -42,6 +42,15 @@ export const CardTitle = styled.h3`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   margin-bottom: ${({ theme }) => theme.spacing[2]};
   color: ${({ theme }) => theme.colors.gray[900]};
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  line-height: 1.4;
+  height: 2.8em;
+  max-height: 2.8em;
 
   ${media.md`
     font-size: ${({ theme }) => theme.fontSizes.lg};

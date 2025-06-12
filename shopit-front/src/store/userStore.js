@@ -36,7 +36,7 @@ const useUserStore = create(
     }),
     {
       name: 'user-storage', // localStorage에 저장될 키 이름
-      storage: localStorage, // 기본은 localStorage (생략해도 됨)
+      // storage: localStorage, // 기본은 localStorage (생략해도 됨)
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "프리미엄 가죽 자켓",
       "price": 159000,
       "description": "최고급 가죽으로 제작된 클래식한 디자인의 자켓입니다.",
@@ -10,10 +10,13 @@
       "rating": 4.5,
       "reviewCount": 128,
       "isNew": true,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "스마트 워치",
       "price": 299000,
       "description": "건강 모니터링과 스마트 알림 기능이 탑재된 최신 스마트워치입니다.",
@@ -22,10 +25,13 @@
       "rating": 4.8,
       "reviewCount": 256,
       "isNew": true,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "모던 소파",
       "price": 890000,
       "description": "편안한 착석감과 세련된 디자인의 3인용 소파입니다.",
@@ -34,10 +40,13 @@
       "rating": 4.6,
       "reviewCount": 89,
       "isNew": false,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "유기농 과일 세트",
       "price": 45000,
       "description": "신선한 유기농 과일로 구성된 프리미엄 과일 세트입니다.",
@@ -46,10 +55,13 @@
       "rating": 4.7,
       "reviewCount": 156,
       "isNew": true,
-      "isPopular": false
+      "isPopular": false,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "프로 요가 매트",
       "price": 35000,
       "description": "미끄럼 방지 기능이 있는 고급 요가 매트입니다.",
@@ -58,10 +70,13 @@
       "rating": 4.4,
       "reviewCount": 92,
       "isNew": false,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "프리미엄 스킨케어 세트",
       "price": 128000,
       "description": "자연 유래 성분으로 만든 고급 스킨케어 세트입니다.",
@@ -70,10 +85,13 @@
       "rating": 4.9,
       "reviewCount": 203,
       "isNew": true,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "베스트셀러 소설",
       "price": 15000,
       "description": "전 세계 독자들의 사랑을 받은 베스트셀러 소설입니다.",
@@ -82,10 +100,13 @@
       "rating": 4.7,
       "reviewCount": 178,
       "isNew": false,
-      "isPopular": true
+      "isPopular": true,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "교육용 로봇",
       "price": 199000,
       "description": "아이들의 창의력과 논리적 사고를 키워주는 교육용 로봇입니다.",
@@ -94,17 +115,22 @@
       "rating": 4.6,
       "reviewCount": 145,
       "isNew": true,
-      "isPopular": false
+      "isPopular": false,
+      "stock": 10,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     }
   ],
   "users": [
     {
-      "email": "user@example.com",
+      "id": 1,
+      "email": "user1@example.com",
       "password": "password123",
-      "username": "홍길동",
-      "role": "user",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z"
+      "name": "홍길동",
+      "phone": "010-1234-5678",
+      "address": "서울시 강남구",
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
       "email": "kim@example.com",
@@ -112,7 +138,8 @@
       "username": "김철수",
       "role": "user",
       "createdAt": "2024-01-02T00:00:00.000Z",
-      "updatedAt": "2024-01-02T00:00:00.000Z"
+      "updatedAt": "2024-01-02T00:00:00.000Z",
+      "id": "8ffa"
     },
     {
       "email": "lee@example.com",
@@ -120,7 +147,8 @@
       "username": "이영희",
       "role": "user",
       "createdAt": "2024-01-03T00:00:00.000Z",
-      "updatedAt": "2024-01-03T00:00:00.000Z"
+      "updatedAt": "2024-01-03T00:00:00.000Z",
+      "id": "91ba"
     },
     {
       "email": "asd123@gmail.com",
@@ -128,7 +156,8 @@
       "username": "최지원",
       "role": "user",
       "createdAt": "2025-06-09T03:25:40.741Z",
-      "updatedAt": "2025-06-09T03:25:40.741Z"
+      "updatedAt": "2025-06-09T03:25:40.741Z",
+      "id": "d289"
     },
     {
       "id": "c171",
@@ -140,66 +169,394 @@
       "updatedAt": "2025-06-11T03:15:21.854Z"
     }
   ],
-  "cart": [
+  "cart": [],
+  "questions": [
     {
-      "id": "2d4f",
-      "productId": 3,
-      "productName": "모던 소파",
-      "price": 890000,
-      "email": "qwe123@naver.com",
-      "quantity": 1,
-      "createdAt": "2025-06-11T03:28:26.627Z",
-      "updatedAt": "2025-06-11T03:28:26.627Z"
+      "id": 1,
+      "title": "배송 문의",
+      "content": "배송이 언제 되나요?",
+      "author": "user1@example.com",
+      "status": "pending",
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
     },
     {
-      "id": "efc1",
-      "productId": 5,
-      "productName": "프로 요가 매트",
-      "price": 35000,
-      "email": "qwe123@naver.com",
-      "quantity": 1,
-      "createdAt": "2025-06-11T03:28:42.009Z",
-      "updatedAt": "2025-06-11T03:28:42.009Z"
+      "id": "2",
+      "title": "반품 절차에 대해 문의드립니다",
+      "content": "상품을 반품하고 싶은데 어떻게 해야 하나요?",
+      "author": "이영희",
+      "status": "pending",
+      "createdAt": "2024-03-14T15:30:00.000Z",
+      "updatedAt": "2024-03-14T15:30:00.000Z"
     },
     {
-      "id": "b5fa",
-      "productId": 2,
-      "productName": "스마트 워치",
-      "price": 299000,
-      "email": "qwe123@naver.com",
-      "quantity": 1,
-      "createdAt": "2025-06-11T03:28:42.473Z",
-      "updatedAt": "2025-06-11T03:28:42.473Z"
+      "id": "3",
+      "title": "결제 오류가 발생했습니다",
+      "content": "결제 과정에서 오류가 발생했는데 어떻게 해야 하나요?",
+      "author": "박지민",
+      "status": "answered",
+      "createdAt": "2024-03-14T11:20:00.000Z",
+      "updatedAt": "2024-03-14T12:30:00.000Z"
     },
     {
-      "id": "2586",
-      "productId": 1,
-      "productName": "프리미엄 가죽 자켓",
-      "price": 159000,
-      "email": "qwe123@naver.com",
-      "quantity": 6,
-      "createdAt": "2025-06-11T03:28:43.083Z",
-      "updatedAt": "2025-06-11T03:28:45.858Z"
+      "id": "4",
+      "title": "상품 사이즈 문의",
+      "content": "이 상품의 사이즈가 정사이즈인가요?",
+      "author": "최수진",
+      "status": "pending",
+      "createdAt": "2024-03-13T16:45:00.000Z",
+      "updatedAt": "2024-03-13T16:45:00.000Z"
     },
     {
-      "id": "11dd",
-      "productId": 2,
-      "productName": "스마트 워치",
-      "price": 299000,
-      "email": "asd123@gmail.com",
-      "quantity": 4,
-      "createdAt": "2025-06-11T03:29:00.288Z",
-      "updatedAt": "2025-06-11T03:36:45.553Z"
+      "id": "5",
+      "title": "회원가입 오류",
+      "content": "회원가입이 되지 않습니다.",
+      "author": "정민수",
+      "status": "answered",
+      "createdAt": "2024-03-13T14:20:00.000Z",
+      "updatedAt": "2024-03-13T15:00:00.000Z"
     },
     {
-      "id": "e124",
-      "productId": 5,
-      "productName": "프로 요가 매트",
-      "price": 35000,
-      "email": "asd123@gmail.com",
-      "quantity": 10,
-      "createdAt": "2025-06-11T03:29:04.783Z",
-      "updatedAt": "2025-06-11T03:36:47.240Z"
+      "id": "6",
+      "title": "배송지 변경 방법",
+      "content": "배송지를 변경하고 싶은데 어떻게 해야 하나요?",
+      "author": "강다희",
+      "status": "pending",
+      "createdAt": "2024-03-12T10:15:00.000Z",
+      "updatedAt": "2024-03-12T10:15:00.000Z"
+    },
+    {
+      "id": "7",
+      "title": "포인트 사용 문의",
+      "content": "적립된 포인트는 어떻게 사용하나요?",
+      "author": "윤서연",
+      "status": "answered",
+      "createdAt": "2024-03-12T09:30:00.000Z",
+      "updatedAt": "2024-03-12T10:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "title": "상품 재입고 문의",
+      "content": "품절된 상품이 언제 재입고되나요?",
+      "author": "임재현",
+      "status": "pending",
+      "createdAt": "2024-03-11T17:20:00.000Z",
+      "updatedAt": "2024-03-11T17:20:00.000Z"
+    },
+    {
+      "id": "9",
+      "title": "쿠폰 적용 방법",
+      "content": "보유한 쿠폰을 어떻게 사용하나요?",
+      "author": "한미영",
+      "status": "answered",
+      "createdAt": "2024-03-11T15:40:00.000Z",
+      "updatedAt": "2024-03-11T16:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "title": "비밀번호 변경",
+      "content": "비밀번호를 변경하고 싶은데 어떻게 해야 하나요?",
+      "author": "송지훈",
+      "status": "pending",
+      "createdAt": "2024-03-10T13:25:00.000Z",
+      "updatedAt": "2024-03-10T13:25:00.000Z"
+    },
+    {
+      "id": "11",
+      "title": "상품 교환 문의",
+      "content": "다른 사이즈로 교환하고 싶습니다.",
+      "author": "김민지",
+      "status": "answered",
+      "createdAt": "2024-03-10T11:10:00.000Z",
+      "updatedAt": "2024-03-10T12:00:00.000Z"
+    },
+    {
+      "id": "12",
+      "title": "주문 취소 방법",
+      "content": "주문을 취소하고 싶은데 어떻게 해야 하나요?",
+      "author": "이준호",
+      "status": "pending",
+      "createdAt": "2024-03-09T16:30:00.000Z",
+      "updatedAt": "2024-03-09T16:30:00.000Z"
+    },
+    {
+      "id": "13",
+      "title": "적립금 사용 문의",
+      "content": "적립금은 어떻게 사용하나요?",
+      "author": "박소연",
+      "status": "answered",
+      "createdAt": "2024-03-09T14:20:00.000Z",
+      "updatedAt": "2024-03-09T15:00:00.000Z"
+    },
+    {
+      "id": "14",
+      "title": "상품 리뷰 작성",
+      "content": "상품 리뷰는 어떻게 작성하나요?",
+      "author": "최현우",
+      "status": "pending",
+      "createdAt": "2024-03-08T10:45:00.000Z",
+      "updatedAt": "2024-03-08T10:45:00.000Z"
+    },
+    {
+      "id": "15",
+      "title": "배송 조회 방법",
+      "content": "주문한 상품의 배송 현황을 어떻게 확인하나요?",
+      "author": "정다은",
+      "status": "answered",
+      "createdAt": "2024-03-08T09:30:00.000Z",
+      "updatedAt": "2024-03-08T10:00:00.000Z"
+    },
+    {
+      "id": "16",
+      "title": "회원 탈퇴 방법",
+      "content": "회원 탈퇴는 어떻게 하나요?",
+      "author": "강준영",
+      "status": "pending",
+      "createdAt": "2024-03-07T17:15:00.000Z",
+      "updatedAt": "2024-03-07T17:15:00.000Z"
+    },
+    {
+      "id": "17",
+      "title": "상품 옵션 변경",
+      "content": "주문한 상품의 옵션을 변경하고 싶습니다.",
+      "author": "윤지민",
+      "status": "answered",
+      "createdAt": "2024-03-07T15:40:00.000Z",
+      "updatedAt": "2024-03-07T16:00:00.000Z"
+    },
+    {
+      "id": "18",
+      "title": "결제 수단 추가",
+      "content": "새로운 결제 수단을 등록하고 싶습니다.",
+      "author": "임서연",
+      "status": "pending",
+      "createdAt": "2024-03-06T13:20:00.000Z",
+      "updatedAt": "2024-03-06T13:20:00.000Z"
+    },
+    {
+      "id": "19",
+      "title": "상품 문의하기",
+      "content": "상품에 대해 문의하고 싶습니다.",
+      "author": "한지훈",
+      "status": "answered",
+      "createdAt": "2024-03-06T11:30:00.000Z",
+      "updatedAt": "2024-03-06T12:00:00.000Z"
+    },
+    {
+      "id": "20",
+      "title": "배송비 문의",
+      "content": "배송비는 얼마인가요?",
+      "author": "송미영",
+      "status": "pending",
+      "createdAt": "2024-03-05T16:50:00.000Z",
+      "updatedAt": "2024-03-05T16:50:00.000Z"
+    },
+    {
+      "title": "정상으로",
+      "content": "만들어버려",
+      "updatedAt": "2025-06-12T07:14:18.842Z",
+      "id": "97b3"
+    },
+    {
+      "id": "36cc",
+      "title": "ㅁㅇㄴㅍㄴㅇㅍ",
+      "content": "ㄴㅇㅊㄴㅇ퓬유",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-12T06:50:09.049Z",
+      "updatedAt": "2025-06-12T06:50:09.050Z"
+    }
+  ],
+  "images": [
+    {
+      "id": "1",
+      "questionId": "2",
+      "fileName": "product_size_issue.jpg",
+      "createdAt": "2024-03-16T14:20:00.000Z"
+    },
+    {
+      "id": "2",
+      "questionId": "2",
+      "fileName": "product_detail.jpg",
+      "createdAt": "2024-03-16T14:20:00.000Z"
+    },
+    {
+      "id": "3",
+      "questionId": "3",
+      "fileName": "order_screenshot.png",
+      "createdAt": "2024-03-17T11:15:00.000Z"
+    },
+    {
+      "id": "518d",
+      "questionId": "97b3",
+      "fileName": "my-key.pem",
+      "createdAt": "2025-06-12T03:33:52.784Z"
+    },
+    {
+      "id": "0b16",
+      "questionId": "36cc",
+      "fileName": "my-key.ppk",
+      "createdAt": "2025-06-12T06:50:09.065Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userEmail": "user1@example.com",
+      "orderNumber": "ORD-20240315-001",
+      "orderDate": "2024-03-15T00:00:00.000Z",
+      "orderStatus": "주문완료",
+      "paymentMethod": "신용카드",
+      "paymentStatus": "결제완료",
+      "shippingAddress": {
+        "recipient": "홍길동",
+        "phone": "010-1234-5678",
+        "address": "서울시 강남구",
+        "detailAddress": "123-45",
+        "zipCode": "06234"
+      },
+      "orderItems": [
+        {
+          "productId": 1,
+          "name": "스마트폰",
+          "price": 1000000,
+          "quantity": 1,
+          "image": "https://example.com/smartphone.jpg"
+        }
+      ],
+      "orderSummary": {
+        "subtotal": 1000000,
+        "shippingFee": 3000,
+        "totalAmount": 1003000
+      },
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "c1de",
+      "userEmail": "user1@example.com",
+      "orderNumber": "ORD-2025-06-12-316",
+      "orderDate": "2025-06-12T08:08:11.622Z",
+      "orderStatus": "주문완료",
+      "paymentMethod": "신용카드",
+      "paymentStatus": "결제완료",
+      "shippingAddress": {
+        "recipient": "최지원",
+        "phone": "01022223333",
+        "address": "ㄹㅈㄷㄹㅈㄷㄹ",
+        "detailAddress": "ㅇㅈㅇㅈㅇㅈㅇ"
+      },
+      "orderItems": [
+        {
+          "productId": "149f",
+          "name": "유기농 과일 세트",
+          "price": 45000,
+          "quantity": 3,
+          "image": "https://picsum.photos/seed/fruits/400/400"
+        },
+        {
+          "productId": "69dd",
+          "name": "스마트 워치",
+          "price": 299000,
+          "quantity": 1,
+          "image": "https://picsum.photos/seed/watch/400/400"
+        }
+      ],
+      "orderSummary": {
+        "subtotal": 434000,
+        "shippingFee": 0,
+        "totalAmount": 434000
+      }
+    },
+    {
+      "id": "0d18",
+      "userEmail": "user1@example.com",
+      "orderNumber": "ORD-2025-06-12-850",
+      "orderDate": "2025-06-12T08:08:46.948Z",
+      "orderStatus": "주문완료",
+      "paymentMethod": "신용카드",
+      "paymentStatus": "결제완료",
+      "shippingAddress": {
+        "recipient": "최지원",
+        "phone": "01022223333",
+        "address": "ㄹㅈㄷㄹㅈㄷㄹ",
+        "detailAddress": "ㅇㅈㅇㅈㅇㅈㅇ"
+      },
+      "orderItems": [
+        {
+          "productId": "149f",
+          "price": 45000,
+          "quantity": 3,
+          "image": "https://picsum.photos/seed/fruits/400/400"
+        },
+        {
+          "productId": "69dd",
+          "price": 299000,
+          "quantity": 1,
+          "image": "https://picsum.photos/seed/watch/400/400"
+        }
+      ],
+      "orderSummary": {
+        "subtotal": 434000,
+        "shippingFee": 0,
+        "totalAmount": 434000
+      }
+    },
+    {
+      "id": "1601",
+      "userEmail": "user1@example.com",
+      "orderNumber": "ORD-2025-06-12-095",
+      "orderDate": "2025-06-12T08:10:19.806Z",
+      "orderStatus": "주문완료",
+      "paymentMethod": "현금",
+      "paymentStatus": "결제완료",
+      "shippingAddress": {
+        "recipient": "김개똥",
+        "phone": "123123123",
+        "address": "ㅂㅈㄷㅂㅈㄷ",
+        "detailAddress": "ㅁㄴㅇㅁㄴㅇ"
+      },
+      "orderItems": [
+        {
+          "productId": "ce52",
+          "price": 159000,
+          "quantity": 1,
+          "image": "https://picsum.photos/seed/jacket/400/400"
+        }
+      ],
+      "orderSummary": {
+        "subtotal": 159000,
+        "shippingFee": 0,
+        "totalAmount": 159000
+      }
+    },
+    {
+      "id": "c03e",
+      "userEmail": "asd123@gmail.com",
+      "orderNumber": "ORD-2025-06-12-895",
+      "orderDate": "2025-06-12T08:12:52.955Z",
+      "orderStatus": "주문완료",
+      "paymentMethod": "신용카드",
+      "paymentStatus": "결제완료",
+      "shippingAddress": {
+        "recipient": "최지원",
+        "phone": "123123",
+        "address": "ㅂㅈㄷㅂㅈㄷ",
+        "detailAddress": "ㅈㄷㄹㅈㄷㅇ"
+      },
+      "orderItems": [
+        {
+          "productId": "8d6c",
+          "price": 890000,
+          "quantity": 1,
+          "image": "https://picsum.photos/seed/sofa/400/400"
+        }
+      ],
+      "orderSummary": {
+        "subtotal": 890000,
+        "shippingFee": 0,
+        "totalAmount": 890000
+      }
     }
   ]
 }
