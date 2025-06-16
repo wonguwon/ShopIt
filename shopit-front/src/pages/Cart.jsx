@@ -40,14 +40,12 @@ const CartItems = styled.div`
   background: white;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: ${props => props.theme.shadows.sm};
 `;
 
 const OrderSummary = styled.div`
   background: white;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: ${props => props.theme.shadows.sm};
   height: fit-content;
 `;
 

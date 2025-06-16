@@ -9,15 +9,7 @@ import { toast } from 'react-toastify';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, isAuthenticated, logout } = useUserStore();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    toast.success('로그아웃되었습니다.');
-    navigate('/login');
-    setIsMenuOpen(false);
-  };
+  const { user, isAuthenticated } = useUserStore();
 
   // 메뉴가 열려있을 때 body 스크롤 방지
   useEffect(() => {

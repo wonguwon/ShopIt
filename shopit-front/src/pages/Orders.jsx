@@ -1,36 +1,137 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { FaSpinner } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import { orderService } from '../api/orders';
 import useUserStore from '../store/userStore';
 import { Button } from '../styles/common/Button';
+import { Container, Section } from '../styles/common/Container';
+import { Title } from '../styles/common/Typography';
 
-const Container = styled.div`
-  width: 100%;
-  min-height: calc(100vh - 64px);
-  background-color: ${props => props.theme.colors.gray[50]};
-  padding: 2rem;
-`;
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useUserStore();
+  const navigate = useNavigate();
 
-const ContentWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  useEffect(() => {
+    loadOrders();
+  }, []);
+
+  const loadOrders = async () => {
+    if (!user) {
+      toast.error('로그인이 필요한 서비스입니다.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const data = await orderService.getOrders(user.email);
+      setOrders(data);
+    } catch (error) {
+      console.error('주문 내역 로딩 실패:', error);
+      toast.error('주문 내역을 불러오는데 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  if (loading) {
+    return (
+      <Container>
+        <LoadingContainer>
+          <FaSpinner size={32} />
+          <LoadingText>주문 내역을 불러오는 중...</LoadingText>
+        </LoadingContainer>
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <Section>
+        <Header>
+          <Title>주문 내역</Title>
+        </Header>
+        <OrderList>
+          {orders.length > 0 ? (
+            orders.map((order) => (
+              <OrderCard key={order.id}>
+                <OrderHeader>
+                  <div>
+                    <OrderNumber>{order.orderNumber}</OrderNumber>
+                    <OrderDate>{formatDate(order.orderDate)}</OrderDate>
+                  </div>
+                  <OrderStatus status={order.orderStatus}>{order.orderStatus}</OrderStatus>
+                </OrderHeader>
+                <OrderItems>
+                  {order.orderItems.map((item, index) => (
+                    <OrderItem key={index}>
+                      <ItemImage src={item.image} alt={item.name} />
+                      <ItemInfo>
+                        <ItemName>{item.name}</ItemName>
+                        <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
+                        <ItemQuantity>수량: {item.quantity}개</ItemQuantity>
+                      </ItemInfo>
+                    </OrderItem>
+                  ))}
+                </OrderItems>
+                <OrderFooter>
+                  <PaymentMethod>
+                    결제방법: {order.paymentMethod === 'credit_card' ? '신용카드' : '현금'}
+                  </PaymentMethod>
+                  <TotalAmount>
+                    총 결제금액: {order.orderSummary?.totalAmount?.toLocaleString() || 0}원
+                  </TotalAmount>
+                </OrderFooter>
+              </OrderCard>
+            ))
+          ) : (
+            <EmptyMessage>
+              <EmptyText>주문 내역이 없습니다.</EmptyText>
+              <Button onClick={() => navigate('/products')}>
+                상품 보러가기
+              </Button>
+            </EmptyMessage>
+          )}
+        </OrderList>
+      </Section>
+    </Container>
+  );
+};
+
+const LoadingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  gap: 1rem;
+`;
+
+const LoadingText = styled.p`
+  color: ${props => props.theme.colors.gray[600]};
+  font-size: ${props => props.theme.fontSizes.lg};
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-`;
-
-const Title = styled.h1`
-  font-size: ${props => props.theme.fontSizes['2xl']};
-  color: ${props => props.theme.colors.gray[800]};
-  font-weight: 600;
+  margin-bottom: 2rem;
 `;
 
 const OrderList = styled.div`
@@ -178,108 +279,5 @@ const EmptyText = styled.p`
   font-size: ${props => props.theme.fontSizes.lg};
   margin-bottom: 1.5rem;
 `;
-
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { user } = useUserStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    loadOrders();
-  }, []);
-
-  const loadOrders = async () => {
-    if (!user) {
-      alert('로그인이 필요한 서비스입니다.');
-      navigate('/login');
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const data = await orderService.getOrders(user.email);
-      setOrders(data);
-    } catch (error) {
-      console.error('주문 내역 로딩 실패:', error);
-      alert('주문 내역을 불러오는데 실패했습니다.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  if (loading) {
-    return (
-      <Container>
-        <ContentWrapper>
-          <div>로딩 중...</div>
-        </ContentWrapper>
-      </Container>
-    );
-  }
-
-  return (
-    <Container>
-      <ContentWrapper>
-        <Header>
-          <Title>주문 내역</Title>
-        </Header>
-        <OrderList>
-          {orders.length > 0 ? (
-            orders.map((order) => (
-              <OrderCard key={order.id}>
-                <OrderHeader>
-                  <div>
-                    <OrderNumber>{order.orderNumber}</OrderNumber>
-                    <OrderDate>{formatDate(order.orderDate)}</OrderDate>
-                  </div>
-                  <OrderStatus status={order.orderStatus}>{order.orderStatus}</OrderStatus>
-                </OrderHeader>
-                <OrderItems>
-                  {order.orderItems.map((item, index) => (
-                    <OrderItem key={index}>
-                      <ItemImage src={item.image} alt={item.name} />
-                      <ItemInfo>
-                        <ItemName>{item.name}</ItemName>
-                        <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
-                        <ItemQuantity>수량: {item.quantity}개</ItemQuantity>
-                      </ItemInfo>
-                    </OrderItem>
-                  ))}
-                </OrderItems>
-                <OrderFooter>
-                  <PaymentMethod>
-                    결제방법: {order.paymentMethod === 'credit_card' ? '신용카드' : '현금'}
-                  </PaymentMethod>
-                  <TotalAmount>
-                    총 결제금액: {order.orderSummary?.totalAmount?.toLocaleString() || 0}원
-                  </TotalAmount>
-                </OrderFooter>
-              </OrderCard>
-            ))
-          ) : (
-            <EmptyMessage>
-              <EmptyText>주문 내역이 없습니다.</EmptyText>
-              <Button onClick={() => navigate('/products')}>
-                상품 보러가기
-              </Button>
-            </EmptyMessage>
-          )}
-        </OrderList>
-      </ContentWrapper>
-    </Container>
-  );
-};
 
 export default Orders; 
