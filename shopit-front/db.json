@@ -123,7 +123,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "user1@example.com",
       "password": "password123",
       "name": "홍길동",
@@ -172,13 +172,14 @@
   "cart": [],
   "questions": [
     {
-      "id": 1,
+      "id": "1",
       "title": "배송 문의",
       "content": "배송이 언제 되나요?",
       "author": "user1@example.com",
       "status": "pending",
       "createdAt": "2024-03-15T00:00:00.000Z",
-      "updatedAt": "2024-03-15T00:00:00.000Z"
+      "updatedAt": "2024-03-15T00:00:00.000Z",
+      "files": []
     },
     {
       "id": "2",
@@ -187,7 +188,8 @@
       "author": "이영희",
       "status": "pending",
       "createdAt": "2024-03-14T15:30:00.000Z",
-      "updatedAt": "2024-03-14T15:30:00.000Z"
+      "updatedAt": "2024-03-14T15:30:00.000Z",
+      "files": []
     },
     {
       "id": "3",
@@ -196,7 +198,8 @@
       "author": "박지민",
       "status": "answered",
       "createdAt": "2024-03-14T11:20:00.000Z",
-      "updatedAt": "2024-03-14T12:30:00.000Z"
+      "updatedAt": "2024-03-14T12:30:00.000Z",
+      "files": []
     },
     {
       "id": "4",
@@ -205,7 +208,8 @@
       "author": "최수진",
       "status": "pending",
       "createdAt": "2024-03-13T16:45:00.000Z",
-      "updatedAt": "2024-03-13T16:45:00.000Z"
+      "updatedAt": "2024-03-13T16:45:00.000Z",
+      "files": []
     },
     {
       "id": "5",
@@ -214,7 +218,8 @@
       "author": "정민수",
       "status": "answered",
       "createdAt": "2024-03-13T14:20:00.000Z",
-      "updatedAt": "2024-03-13T15:00:00.000Z"
+      "updatedAt": "2024-03-13T15:00:00.000Z",
+      "files": []
     },
     {
       "id": "6",
@@ -223,7 +228,8 @@
       "author": "강다희",
       "status": "pending",
       "createdAt": "2024-03-12T10:15:00.000Z",
-      "updatedAt": "2024-03-12T10:15:00.000Z"
+      "updatedAt": "2024-03-12T10:15:00.000Z",
+      "files": []
     },
     {
       "id": "7",
@@ -232,7 +238,8 @@
       "author": "윤서연",
       "status": "answered",
       "createdAt": "2024-03-12T09:30:00.000Z",
-      "updatedAt": "2024-03-12T10:00:00.000Z"
+      "updatedAt": "2024-03-12T10:00:00.000Z",
+      "files": []
     },
     {
       "id": "8",
@@ -241,7 +248,8 @@
       "author": "임재현",
       "status": "pending",
       "createdAt": "2024-03-11T17:20:00.000Z",
-      "updatedAt": "2024-03-11T17:20:00.000Z"
+      "updatedAt": "2024-03-11T17:20:00.000Z",
+      "files": []
     },
     {
       "id": "9",
@@ -250,7 +258,8 @@
       "author": "한미영",
       "status": "answered",
       "createdAt": "2024-03-11T15:40:00.000Z",
-      "updatedAt": "2024-03-11T16:00:00.000Z"
+      "updatedAt": "2024-03-11T16:00:00.000Z",
+      "files": []
     },
     {
       "id": "10",
@@ -259,7 +268,8 @@
       "author": "송지훈",
       "status": "pending",
       "createdAt": "2024-03-10T13:25:00.000Z",
-      "updatedAt": "2024-03-10T13:25:00.000Z"
+      "updatedAt": "2024-03-10T13:25:00.000Z",
+      "files": []
     },
     {
       "id": "11",
@@ -268,7 +278,8 @@
       "author": "김민지",
       "status": "answered",
       "createdAt": "2024-03-10T11:10:00.000Z",
-      "updatedAt": "2024-03-10T12:00:00.000Z"
+      "updatedAt": "2024-03-10T12:00:00.000Z",
+      "files": []
     },
     {
       "id": "12",
@@ -277,7 +288,8 @@
       "author": "이준호",
       "status": "pending",
       "createdAt": "2024-03-09T16:30:00.000Z",
-      "updatedAt": "2024-03-09T16:30:00.000Z"
+      "updatedAt": "2024-03-09T16:30:00.000Z",
+      "files": []
     },
     {
       "id": "13",
@@ -286,7 +298,8 @@
       "author": "박소연",
       "status": "answered",
       "createdAt": "2024-03-09T14:20:00.000Z",
-      "updatedAt": "2024-03-09T15:00:00.000Z"
+      "updatedAt": "2024-03-09T15:00:00.000Z",
+      "files": []
     },
     {
       "id": "14",
@@ -295,7 +308,8 @@
       "author": "최현우",
       "status": "pending",
       "createdAt": "2024-03-08T10:45:00.000Z",
-      "updatedAt": "2024-03-08T10:45:00.000Z"
+      "updatedAt": "2024-03-08T10:45:00.000Z",
+      "files": []
     },
     {
       "id": "15",
@@ -304,7 +318,8 @@
       "author": "정다은",
       "status": "answered",
       "createdAt": "2024-03-08T09:30:00.000Z",
-      "updatedAt": "2024-03-08T10:00:00.000Z"
+      "updatedAt": "2024-03-08T10:00:00.000Z",
+      "files": []
     },
     {
       "id": "16",
@@ -313,7 +328,8 @@
       "author": "강준영",
       "status": "pending",
       "createdAt": "2024-03-07T17:15:00.000Z",
-      "updatedAt": "2024-03-07T17:15:00.000Z"
+      "updatedAt": "2024-03-07T17:15:00.000Z",
+      "files": []
     },
     {
       "id": "17",
@@ -322,7 +338,8 @@
       "author": "윤지민",
       "status": "answered",
       "createdAt": "2024-03-07T15:40:00.000Z",
-      "updatedAt": "2024-03-07T16:00:00.000Z"
+      "updatedAt": "2024-03-07T16:00:00.000Z",
+      "files": []
     },
     {
       "id": "18",
@@ -331,7 +348,8 @@
       "author": "임서연",
       "status": "pending",
       "createdAt": "2024-03-06T13:20:00.000Z",
-      "updatedAt": "2024-03-06T13:20:00.000Z"
+      "updatedAt": "2024-03-06T13:20:00.000Z",
+      "files": []
     },
     {
       "id": "19",
@@ -340,7 +358,8 @@
       "author": "한지훈",
       "status": "answered",
       "createdAt": "2024-03-06T11:30:00.000Z",
-      "updatedAt": "2024-03-06T12:00:00.000Z"
+      "updatedAt": "2024-03-06T12:00:00.000Z",
+      "files": []
     },
     {
       "id": "20",
@@ -349,13 +368,15 @@
       "author": "송미영",
       "status": "pending",
       "createdAt": "2024-03-05T16:50:00.000Z",
-      "updatedAt": "2024-03-05T16:50:00.000Z"
+      "updatedAt": "2024-03-05T16:50:00.000Z",
+      "files": []
     },
     {
       "title": "정상으로",
       "content": "만들어버려",
       "updatedAt": "2025-06-12T07:14:18.842Z",
-      "id": "97b3"
+      "id": "97b3",
+      "files": []
     },
     {
       "id": "36cc",
@@ -364,44 +385,75 @@
       "author": "익명",
       "status": "pending",
       "createdAt": "2025-06-12T06:50:09.049Z",
-      "updatedAt": "2025-06-12T06:50:09.050Z"
+      "updatedAt": "2025-06-12T06:50:09.050Z",
+      "files": []
+    },
+    {
+      "id": "9f38",
+      "title": "asc",
+      "content": "ascasx",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-16T01:47:39.217Z",
+      "updatedAt": "2025-06-16T01:47:39.217Z",
+      "files": []
+    },
+    {
+      "id": "dc59",
+      "title": "test",
+      "content": "test123123",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-16T01:57:19.506Z",
+      "updatedAt": "2025-06-16T01:57:19.506Z",
+      "files": []
+    },
+    {
+      "id": "e8cb",
+      "title": "ㅁㄴㅇㅁㄴ",
+      "content": "ㅂㅈㄷ123",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-16T02:07:20.679Z",
+      "updatedAt": "2025-06-16T02:07:20.679Z",
+      "files": []
+    },
+    {
+      "id": "43d9",
+      "title": "ㅁㄴㅇ",
+      "content": "ㅁㄴㅇ123",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-16T02:12:59.945Z",
+      "updatedAt": "2025-06-16T02:12:59.945Z",
+      "files": []
+    },
+    {
+      "id": "01ff",
+      "title": "ㄴㅇㄹㄴㅇㄹㄴㅇㄹ",
+      "content": "ㅁㄴㅇㄹㅁㄴㅇ123",
+      "author": "익명",
+      "status": "pending",
+      "createdAt": "2025-06-16T02:19:58.342Z",
+      "updatedAt": "2025-06-16T02:19:58.342Z",
+      "files": [
+        {
+          "originalName": "index.html",
+          "fileName": "76d807cd-5753-4ee3-a32c-dbc11c26be36.html",
+          "fileType": "text/html"
+        },
+        {
+          "originalName": "test.jpg",
+          "fileName": "e8b5fcd5-6c69-4f8b-adbe-e00c74d67dff.jpg",
+          "fileType": "image/jpeg"
+        }
+      ]
     }
   ],
-  "images": [
-    {
-      "id": "1",
-      "questionId": "2",
-      "fileName": "product_size_issue.jpg",
-      "createdAt": "2024-03-16T14:20:00.000Z"
-    },
-    {
-      "id": "2",
-      "questionId": "2",
-      "fileName": "product_detail.jpg",
-      "createdAt": "2024-03-16T14:20:00.000Z"
-    },
-    {
-      "id": "3",
-      "questionId": "3",
-      "fileName": "order_screenshot.png",
-      "createdAt": "2024-03-17T11:15:00.000Z"
-    },
-    {
-      "id": "518d",
-      "questionId": "97b3",
-      "fileName": "my-key.pem",
-      "createdAt": "2025-06-12T03:33:52.784Z"
-    },
-    {
-      "id": "0b16",
-      "questionId": "36cc",
-      "fileName": "my-key.ppk",
-      "createdAt": "2025-06-12T06:50:09.065Z"
-    }
-  ],
+  "images": [],
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "userEmail": "user1@example.com",
       "orderNumber": "ORD-20240315-001",
       "orderDate": "2024-03-15T00:00:00.000Z",
@@ -417,18 +469,14 @@
       },
       "orderItems": [
         {
-          "productId": 1,
-          "name": "스마트폰",
-          "price": 1000000,
+          "productId": "1",
+          "productName": "프리미엄 가죽 자켓",
+          "price": 159000,
           "quantity": 1,
-          "image": "https://example.com/smartphone.jpg"
+          "image": "https://picsum.photos/seed/jacket/400/400"
         }
       ],
-      "orderSummary": {
-        "subtotal": 1000000,
-        "shippingFee": 3000,
-        "totalAmount": 1003000
-      },
+      "totalAmount": 159000,
       "createdAt": "2024-03-15T00:00:00.000Z",
       "updatedAt": "2024-03-15T00:00:00.000Z"
     },

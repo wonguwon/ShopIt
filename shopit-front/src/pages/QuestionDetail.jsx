@@ -11,10 +11,16 @@ import {
   QuestionHeader,
   QuestionMeta,
   QuestionContent,
-  ButtonGroup
+  ButtonGroup,
+  FileList,
+  FileItem,
+  FileDownloadButton
 } from '../styles/Question.styles';
 import { questionService } from '../api/questions';
-import styled from 'styled-components';
+import { fileService } from '../api/files';
+import { toast } from 'react-toastify';
+import { FaDownload } from 'react-icons/fa';
+import { downloadFile } from '../utils/fileUtils';
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -39,7 +45,7 @@ const QuestionDetail = () => {
       setContent(data.content);
     } catch (error) {
       console.error('문의글을 불러오는데 실패했습니다:', error);
-      alert('문의글을 불러오는데 실패했습니다.');
+      toast.error('문의글을 불러오는데 실패했습니다.');
       navigate('/question');
     } finally {
       setIsLoading(false);
@@ -58,11 +64,11 @@ const QuestionDetail = () => {
     try {
       setIsSubmitting(true);
       await questionService.deleteQuestion(id);
-      alert('문의글이 삭제되었습니다.');
+      toast.success('문의글이 삭제되었습니다.');
       navigate('/question');
     } catch (error) {
       console.error('문의글 삭제 실패:', error);
-      alert('문의글 삭제에 실패했습니다.');
+      toast.error('문의글 삭제에 실패했습니다.');
     } finally {
       setIsSubmitting(false);
     }
@@ -72,7 +78,7 @@ const QuestionDetail = () => {
     e.preventDefault();
     
     if (!title.trim() || !content.trim()) {
-      alert('제목과 내용을 모두 입력해주세요.');
+      toast.error('제목과 내용을 모두 입력해주세요.');
       return;
     }
 
@@ -86,12 +92,22 @@ const QuestionDetail = () => {
       });
       setIsEditing(false);
       await loadQuestion();
-      alert('문의글이 수정되었습니다.');
+      toast.success('문의글이 수정되었습니다.');
     } catch (error) {
       console.error('문의글 수정 실패:', error);
-      alert('문의글 수정에 실패했습니다.');
+      toast.error('문의글 수정에 실패했습니다.');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleFileDownload = async (file) => {
+    try {
+      const downloadUrl = await fileService.getDownloadUrl(file.fileName, file.originalName);
+      downloadFile(downloadUrl, file.originalName);
+    } catch (error) {
+      console.error('파일 다운로드 실패:', error);
+      toast.error('파일 다운로드에 실패했습니다.');
     }
   };
 
@@ -146,6 +162,19 @@ const QuestionDetail = () => {
             </QuestionMeta>
           </QuestionHeader>
           <QuestionContent>{question.content}</QuestionContent>
+          {question.files && question.files.length > 0 && (
+            <FileList>
+              <h3>첨부파일</h3>
+              {question.files.map((file, index) => (
+                <FileItem key={index}>
+                  <span>{file.originalName}</span>
+                  <FileDownloadButton onClick={() => handleFileDownload(file)}>
+                    <FaDownload /> 다운로드
+                  </FileDownloadButton>
+                </FileItem>
+              ))}
+            </FileList>
+          )}
           <ButtonGroup>
             <Button onClick={() => navigate('/question')}>목록으로</Button>
             <Button onClick={handleEdit}>수정하기</Button>

@@ -184,4 +184,59 @@ export const ButtonGroup = styled.div`
   padding-top: 1rem;
   border-top: 1px solid ${props => props.theme.colors.gray[200]};
   justify-content: flex-end;
+`;
+
+export const FileList = styled.div`
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: ${props => props.theme.colors.gray[50]};
+  border-radius: 8px;
+
+  h3 {
+    font-size: ${props => props.theme.fontSizes.lg};
+    color: ${props => props.theme.colors.gray[800]};
+    margin-bottom: 1rem;
+  }
+`;
+
+export const FileItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: white;
+  border: 1px solid ${props => props.theme.colors.gray[200]};
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  span {
+    color: ${props => props.theme.colors.gray[700]};
+    font-size: ${props => props.theme.fontSizes.sm};
+  }
+`;
+
+export const FileDownloadButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: ${props => props.theme.fontSizes.sm};
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.primaryDark};
+  }
+
+  svg {
+    font-size: ${props => props.theme.fontSizes.base};
+  }
 `; 
