@@ -41,6 +41,6 @@ export const API_ENDPOINTS = {
     DETAIL: (id) => `/questions/${id}`,
     UPDATE: (id) => `/questions/${id}`,
     DELETE: (id) => `/questions/${id}`,
-    SEARCH: (query) => `/questions?q=${query}`
-  }
+    SEARCH: (query) => `/questions?q=${query}`,
+  },
 };

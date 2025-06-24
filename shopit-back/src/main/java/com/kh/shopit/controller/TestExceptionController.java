@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Min;
 
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/test")
 public class TestExceptionController {
 
     // 사용자를 찾을 수 없는 경우 테스트
